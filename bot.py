@@ -22,10 +22,10 @@ from aiogram.utils.keyboard import InlineKeyboardBuilder
 # Config & setup
 # ─────────────────────────────────────────────────────────
 load_dotenv()
-BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN") or os.getenv("BOT_TOKEN") or os.getenv("TG_TOKEN")
-GOOGLE_KEY = os.getenv("GOOGLE_API_KEY") or os.getenv("GOOGLE_KEY")
+BOT_TOKEN = os.getenv("TELEGRAM_TOKEN")  # Render folosește TELEGRAM_TOKEN
 if not BOT_TOKEN:
-    raise SystemExit("❌ Lipsă TELEGRAM_BOT_TOKEN în .env")
+    raise SystemExit("❌ Lipsă TELEGRAM_TOKEN (Render Environment)")
+
 
 TZ = ZoneInfo("Europe/Chisinau")
 DATA_DIR = "data"
@@ -548,7 +548,7 @@ async def log_everything(message: Message):
 # ─────────────────────────────────────────────────────────
 async def main():
     # previne conflictul „terminated by other getUpdates request”
-    bot = Bot(BOT_TOKEN)
+
     await bot.delete_webhook(drop_pending_updates=True)
 
     dp = Dispatcher()
