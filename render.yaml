@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: my-telegram-bot
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn server:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: TELEGRAM_TOKEN
+        sync: false
+      - key: WEBHOOK_SECRET
+        generateValue: true
+      # - key: BASE_URL
+      #   value: https://numele-tau.onrender.com
