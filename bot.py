@@ -2,9 +2,10 @@
 # -*- coding: utf-8 -*-
 
 """
-bot.py — router + handlers pentru Aiogram 3.x
-- NU creează Bot și NU pornește polling la import (webhook friendly).
-- Serverul (server.py) se ocupă să creeze Bot și să includă acest router.
+bot.py — handlers Aiogram 3.22 pentru proiectul tău (fără polling la import)
+- expune: router
+- nu instanțiază Bot/Dispatcher (le face server.py)
+- folosește GOOGLE_API_KEY dacă există, altfel are fallback local
 """
 
 import os
@@ -17,8 +18,8 @@ import datetime as dt
 from typing import Dict, Any, Tuple, List, Optional
 from zoneinfo import ZoneInfo
 
-import certifi
 import aiohttp
+import certifi
 from dotenv import load_dotenv
 
 from aiogram import F, Router
@@ -29,21 +30,18 @@ from aiogram.types import (
     InlineKeyboardMarkup, InlineKeyboardButton,
     ReplyKeyboardRemove,
 )
+from aiogram.utils.keyboard import InlineKeyboardBuilder
 
 # ─────────────────────────────────────────────────────────
 # Config
 # ─────────────────────────────────────────────────────────
-load_dotenv()  # OK și pe Render, dar variabilele vin deja din Environment
-
-# pe Render BOT_TOKEN e folosit doar de server.py; aici îl citim doar
-# dacă rulezi local cu __main__ (polling).
-BOT_TOKEN = os.getenv("TELEGRAM_TOKEN") or os.getenv("TELEGRAM_BOT_TOKEN")
-GOOGLE_KEY = os.getenv("GOOGLE_API_KEY") or os.getenv("GOOGLE_KEY")  # opțional
+load_dotenv()  # permite .env local; pe Render folosești Environment tab
 
 TZ = ZoneInfo("Europe/Chisinau")
 DATA_DIR = "data"
+GOOGLE_KEY = os.getenv("GOOGLE_API_KEY") or os.getenv("GOOGLE_KEY")  # opțional
 
-# pagination
+# Paginare listă
 PER_PAGE = 20
 BUTTONS_PER_ROW = 5
 
@@ -57,18 +55,19 @@ BRANDS: Dict[str, Tuple[str, str, int, int]] = {
     "t":  ("TOT",         "tot_for_bot.json",         71,  80),
 }
 
-# runtime state (în memorie)
+# State per user (memorie în RAM; pentru Render e ok)
 user_location: Dict[int, Tuple[float, float]] = {}
-user_brand: Dict[int, str] = {}
+user_brand: Dict[int, str] = {}       # ultimul brand ales (pt numere simple)
 user_route_mode: Dict[int, str] = {}  # "loc" | "first"
 
+router = Router()  # <- Exportăm asta pentru server.py
+
 # ─────────────────────────────────────────────────────────
-# Utils
+# Utilitare
 # ─────────────────────────────────────────────────────────
 def user_tag(u) -> str:
-    uname = f"@{u.username}" if getattr(u, "username", None) else f"{u.first_name or ''} {u.last_name or ''}".strip()
-    if not uname:
-        uname = "<no-username>"
+    uname = f"@{getattr(u, 'username', '')}" if getattr(u, "username", None) else \
+            f"{getattr(u, 'first_name', '')} {getattr(u, 'last_name', '')}".strip() or "<no-username>"
     return f"{uname} (#{u.id})"
 
 def now_hms() -> str:
@@ -77,12 +76,16 @@ def now_hms() -> str:
 def load_dict(fname: str) -> Dict[str, Any]:
     path = os.path.join(DATA_DIR, fname)
     if not os.path.exists(path):
-        print(f"[WARN] Lipsește {path}")
+        print(f"[WARN] Lipsește fișierul de date: {path}")
         return {}
-    with open(path, "r", encoding="utf-8") as f:
-        d = json.load(f)
-    # asigurăm chei string
-    return {str(k): v for k, v in d.items()}
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            d = json.load(f)
+        # cheia trebuie să fie string
+        return {str(k): v for k, v in d.items()}
+    except Exception as e:
+        print(f"[ERR] {path}: {e}")
+        return {}
 
 DATA_BY_BRAND: Dict[str, Dict[str, Any]] = {}
 MAX_BY_BRAND: Dict[str, int] = {}
@@ -91,9 +94,10 @@ for code, (_, fname, lo, hi) in BRANDS.items():
     DATA_BY_BRAND[code] = d
     nums = [int(k) for k in d.keys() if str(k).isdigit()]
     MAX_BY_BRAND[code] = min(max(nums) if nums else hi, hi)
+
 print("[READY] brands:", {k: len(v) for k, v in DATA_BY_BRAND.items()})
 
-def haversine_km(a1, b1, a2, b2) -> float:
+def haversine_km(a1: float, b1: float, a2: float, b2: float) -> float:
     R = 6371.0088
     p1, p2 = math.radians(a1), math.radians(a2)
     dphi   = math.radians(a2 - a1)
@@ -106,8 +110,9 @@ def today_key(now: Optional[dt.datetime] = None) -> str:
     return ["mon","tue","wed","thu","fri","sat","sun"][now.weekday()]
 
 _TIME_RGX = re.compile(r"(\d{1,2}):(\d{2})\s*[-–]\s*(\d{1,2}):(\d{2})")
+
 def parse_ranges(text: str) -> List[Tuple[dt.time, dt.time]]:
-    out = []
+    out: List[Tuple[dt.time, dt.time]] = []
     for m in _TIME_RGX.finditer(text or ""):
         h1, m1, h2, m2 = map(int, m.groups())
         out.append((dt.time(h1, m1, tzinfo=TZ), dt.time(h2, m2, tzinfo=TZ)))
@@ -118,9 +123,11 @@ def is_open_now(day_text: str, now: Optional[dt.datetime] = None) -> bool:
     tnow = now.timetz()
     for t1, t2 in parse_ranges(day_text):
         if t1 <= t2:
-            if t1 <= tnow <= t2: return True
-        else:
-            if tnow >= t1 or tnow <= t2: return True
+            if t1 <= tnow <= t2:
+                return True
+        else:  # peste miezul nopții
+            if tnow >= t1 or tnow <= t2:
+                return True
     return False
 
 def format_hours(hours: Dict[str, str]) -> str:
@@ -128,21 +135,21 @@ def format_hours(hours: Dict[str, str]) -> str:
     names = ["Luni","Marți","Miercuri","Joi","Vineri","Sâmbătă","Duminică"]
     return "\n".join(f"{n}: {hours.get(k,'') or '—'}" for k,n in zip(order, names))
 
-# normalizăm codul brandului (acceptă „lin”, „linella”, „fo”, „fourchette” etc.)
 def normalize_brand(s: str) -> Optional[str]:
     s = s.strip().lower()
-    if s in BRANDS: return s
-    if s in ("l", "lin", "linella"): return "l"
-    if s in ("f", "fid", "fidesco"): return "f"
-    if s in ("c", "cip"):           return "c"
-    if s in ("m", "merci"):         return "m"
-    if s in ("fo", "four", "fourchette"): return "fo"
-    if s in ("t", "tot"):           return "t"
+    if s in BRANDS:
+        return s
+    if s.startswith("lin"): return "l"
+    if s.startswith("fid"): return "f"
+    if s.startswith("cip"): return "c"
+    if s.startswith("mer"): return "m"
+    if s in ("t", "tot") or s.startswith("tot"): return "t"
+    if s.startswith("fo") or s.startswith("four"): return "fo"
     return None
 
 def parse_code_token(tok: str) -> Optional[Tuple[str, int]]:
     t = tok.strip().lower()
-    m = re.fullmatch(r"([a-z]{1,10})\s*(\d{1,3})", t)
+    m = re.fullmatch(r"([a-z]{1,10})\s*(\d{1,3})", t, flags=re.IGNORECASE)
     if not m:
         return None
     code = normalize_brand(m.group(1))
@@ -150,8 +157,8 @@ def parse_code_token(tok: str) -> Optional[Tuple[str, int]]:
         return None
     return code, int(m.group(2))
 
-def parse_codes_line(text: str) -> List[Tuple[str,int]]:
-    out: List[Tuple[str,int]] = []
+def parse_codes_line(text: str) -> List[Tuple[str, int]]:
+    out: List[Tuple[str, int]] = []
     for tok in re.split(r"[,\s;|]+", (text or "").strip()):
         if not tok:
             continue
@@ -173,105 +180,71 @@ def main_kb() -> ReplyKeyboardMarkup:
             [KeyboardButton(text="🧭 Cale optimă"), KeyboardButton(text="🏠 Meniu")],
         ],
         resize_keyboard=True,
-        is_persistent=True
+        is_persistent=True,
     )
 
 def route_mode_kb() -> InlineKeyboardMarkup:
-    return InlineKeyboardMarkup(inline_keyboard=[
-        [InlineKeyboardButton(text="📍 De la locația mea", callback_data="route:loc")],
-        [InlineKeyboardButton(text="🚩 De la primul magazin", callback_data="route:first")],
-        [InlineKeyboardButton(text="🏠 Meniu", callback_data="home")]
-    ])
+    return InlineKeyboardMarkup(inline_keyboard=[[
+        InlineKeyboardButton(text="📍 De la locația mea", callback_data="route:loc"),
+    ],[
+        InlineKeyboardButton(text="🚩 De la primul magazin", callback_data="route:first"),
+    ],[
+        InlineKeyboardButton(text="🏠 Meniu", callback_data="home"),
+    ]])
 
 def page_kb(brand_code: str, page: int) -> InlineKeyboardMarkup:
     _, _, lo, hi = BRANDS[brand_code]
     max_num = MAX_BY_BRAND.get(brand_code, hi)
-    start = lo + (page-1)*PER_PAGE
+    start = lo + (page - 1) * PER_PAGE
     end   = min(max_num, hi, start + PER_PAGE - 1)
-    if start > end:
+    if start > end:  # corecție de pagină
         start = max(lo, hi - PER_PAGE + 1)
         end   = min(max_num, hi)
 
-    rows: List[List[InlineKeyboardButton]] = []
+    kb = InlineKeyboardBuilder()
     row: List[InlineKeyboardButton] = []
-    for n in range(start, end+1):
+    for n in range(start, end + 1):
         row.append(InlineKeyboardButton(text=str(n), callback_data=f"i:{brand_code}:{n}"))
         if len(row) == BUTTONS_PER_ROW:
-            rows.append(row); row = []
+            kb.row(*row); row = []
     if row:
-        rows.append(row)
+        kb.row(*row)
 
-    nav: List[InlineKeyboardButton] = []
+    nav = []
     if start > lo:
         nav.append(InlineKeyboardButton(text="◀️ Înapoi",  callback_data=f"p:{brand_code}:{page-1}"))
     if end < min(max_num, hi):
         nav.append(InlineKeyboardButton(text="▶️ Înainte", callback_data=f"p:{brand_code}:{page+1}"))
     if nav:
-        rows.append(nav)
+        kb.row(*nav)
 
-    rows.append([InlineKeyboardButton(text="🏠 Revino la meniu", callback_data="home")])
-    return InlineKeyboardMarkup(inline_keyboard=rows)
-
-def waze_url(lat: float, lon: float) -> str:
-    return f"https://waze.com/ul?ll={lat:.6f}%2C{lon:.6f}&navigate=yes"
-
-def yandex_url(lat: float, lon: float) -> str:
-    return f"https://yandex.com/maps/?rtext=~{lat:.6f}%2C{lon:.6f}&rtt=auto"
-
-def google_maps_url(origin: Optional[Tuple[float,float]],
-                    ordered: List[Tuple[float,float]]) -> str:
-    # https://www.google.com/maps/dir/?api=1&origin=lat,lon&destination=lat,lon&waypoints=|lat,lon|...
-    params = []
-    if origin:
-        params.append(("origin", f"{origin[0]},{origin[1]}"))
-    if ordered:
-        params.append(("destination", f"{ordered[-1][0]},{ordered[-1][1]}"))
-        if len(ordered) > 1:
-            w = "|".join(f"{a},{b}" for a,b in ordered[:-1])
-            params.append(("waypoints", w))
-    q = "&".join(f"{k}={v}" for k,v in params)
-    return f"https://www.google.com/maps/dir/?api=1&{q}"
-
-def links_kb_single(lat: float, lon: float) -> InlineKeyboardMarkup:
-    return InlineKeyboardMarkup(inline_keyboard=[
-        [InlineKeyboardButton(text="🗺️ Google Maps", url=f"https://www.google.com/maps?q={lat:.6f},{lon:.6f}")],
-        [InlineKeyboardButton(text="🚗 Waze",        url=waze_url(lat, lon)),
-         InlineKeyboardButton(text="🧭 Yandex Maps", url=yandex_url(lat, lon))],
-        [InlineKeyboardButton(text="🏠 Revino la meniu", callback_data="home")]
-    ])
-
-def links_kb_route(origin: Optional[Tuple[float,float]],
-                   ordered: List[Tuple[float,float]]) -> InlineKeyboardMarkup:
-    g = google_maps_url(origin, ordered)
-    lat, lon = ordered[-1]
-    return InlineKeyboardMarkup(inline_keyboard=[
-        [InlineKeyboardButton(text="🗺️ Google Maps", url=g)],
-        [InlineKeyboardButton(text="🚗 Waze (destinație)",        url=waze_url(lat, lon)),
-         InlineKeyboardButton(text="🧭 Yandex Maps (destinație)", url=yandex_url(lat, lon))],
-        [InlineKeyboardButton(text="🏠 Revino la meniu", callback_data="home")]
-    ])
+    kb.row(InlineKeyboardButton(text="🏠 Revino la meniu", callback_data="home"))
+    return kb.as_markup()
 
 # ─────────────────────────────────────────────────────────
-# Directions (Google optional, cu fallback local)
+# Directions helpers
 # ─────────────────────────────────────────────────────────
-async def directions_optimize(origin: Tuple[float,float],
-                              points: List[Tuple[float,float]]) -> Tuple[List[int], int]:
+async def directions_optimize(origin: Tuple[float, float],
+                              points: List[Tuple[float, float]]) -> Tuple[List[int], int]:
+    """
+    Întoarce (ordine_index, total_sec). Fallback local dacă nu avem Google Key sau request-ul eșuează.
+    """
     if not points:
         return [], 0
 
-    # dacă nu avem cheie, folosim fallback (ordonează după distanță)
     if not GOOGLE_KEY:
+        # fallback simplu: ordonăm după distanța geodezică
         order = sorted(range(len(points)),
                        key=lambda i: haversine_km(origin[0], origin[1], points[i][0], points[i][1]))
         km = 0.0; cur = origin
         for i in order:
             km += haversine_km(cur[0], cur[1], points[i][0], points[i][1])
             cur = points[i]
-        return order, int(km/35*3600)
+        return order, int(km / 35 * 3600)  # ~35km/h
 
+    # avem cheie → încercăm Directions API
     dest = points[-1]
     ways = points[:-1]
-
     params = {
         "origin": f"{origin[0]},{origin[1]}",
         "destination": f"{dest[0]},{dest[1]}",
@@ -280,7 +253,7 @@ async def directions_optimize(origin: Tuple[float,float],
         "key": GOOGLE_KEY,
     }
     if ways:
-        params["waypoints"] = "optimize:true|" + "|".join(f"{a},{b}" for a,b in ways)
+        params["waypoints"] = "optimize:true|" + "|".join(f"{a},{b}" for a, b in ways)
 
     url = "https://maps.googleapis.com/maps/api/directions/json"
     ssl_ctx   = ssl.create_default_context(cafile=certifi.where())
@@ -299,35 +272,79 @@ async def directions_optimize(origin: Tuple[float,float],
                 for leg in route.get("legs", []):
                     d = leg.get("duration_in_traffic") or leg.get("duration") or {}
                     total += int(d.get("value", 0))
-                return (order + [len(points)-1], total)
+                return (order + [len(points) - 1], total)
         except Exception:
             await asyncio.sleep(0.8)
 
-    # Fallback local dacă Google a eșuat
+    # fallback local dacă Google eșuează
     order = sorted(range(len(points)),
                    key=lambda i: haversine_km(origin[0], origin[1], points[i][0], points[i][1]))
     km = 0.0; cur = origin
     for i in order:
         km += haversine_km(cur[0], cur[1], points[i][0], points[i][1])
         cur = points[i]
-    return order, int(km/35*3600)
+    return order, int(km / 35 * 3600)
+
+def google_maps_url(origin: Optional[Tuple[float, float]],
+                    ordered: List[Tuple[float, float]]) -> str:
+    params = []
+    if origin:
+        params.append(("origin", f"{origin[0]},{origin[1]}"))
+    if ordered:
+        params.append(("destination", f"{ordered[-1][0]},{ordered[-1][1]}"))
+        if len(ordered) > 1:
+            w = "|".join(f"{a},{b}" for a, b in ordered[:-1])
+            params.append(("waypoints", w))
+    q = "&".join(f"{k}={v}" for k, v in params)
+    return f"https://www.google.com/maps/dir/?api=1&{q}"
+
+def waze_url(lat: float, lon: float) -> str:
+    return f"https://waze.com/ul?ll={lat:.6f}%2C{lon:.6f}&navigate=yes"
+
+def yandex_url(lat: float, lon: float) -> str:
+    return f"https://yandex.com/maps/?rtext=~{lat:.6f}%2C{lon:.6f}&rtt=auto"
+
+def links_kb_single(lat: float, lon: float) -> InlineKeyboardMarkup:
+    return InlineKeyboardMarkup(inline_keyboard=[[
+        InlineKeyboardButton(text="🗺️ Google Maps", url=f"https://www.google.com/maps?q={lat:.6f},{lon:.6f}")
+    ],[
+        InlineKeyboardButton(text="🚗 Waze",        url=waze_url(lat, lon)),
+        InlineKeyboardButton(text="🧭 Yandex Maps", url=yandex_url(lat, lon)),
+    ],[
+        InlineKeyboardButton(text="🏠 Revino la meniu", callback_data="home"),
+    ]])
+
+def links_kb_route(origin: Optional[Tuple[float, float]],
+                   ordered: List[Tuple[float, float]]) -> InlineKeyboardMarkup:
+    g = google_maps_url(origin, ordered)
+    lat, lon = ordered[-1]
+    return InlineKeyboardMarkup(inline_keyboard=[[
+        InlineKeyboardButton(text="🗺️ Google Maps", url=g)
+    ],[
+        InlineKeyboardButton(text="🚗 Waze (destinație)",        url=waze_url(lat, lon)),
+        InlineKeyboardButton(text="🧭 Yandex Maps (destinație)", url=yandex_url(lat, lon)),
+    ],[
+        InlineKeyboardButton(text="🏠 Revino la meniu", callback_data="home"),
+    ]])
 
 # ─────────────────────────────────────────────────────────
-# Router & Handlers
+# Handlers
 # ─────────────────────────────────────────────────────────
-router = Router()
-
 async def show_item(message: Message, brand_code: str, n: int):
     if brand_code not in BRANDS:
-        await message.answer("Lanț necunoscut. Folosește l/f/c/m/fo/t (ex: l10, fo70).", reply_markup=main_kb()); return
+        await message.answer("Lanț necunoscut. Folosește l/f/c/m/fo/t (ex: l10, fo70).", reply_markup=main_kb())
+        return
+
     name, _, lo, hi = BRANDS[brand_code]
     if not (lo <= n <= hi):
-        await message.answer(f"{name} are intervalul {lo}..{hi}. Ai cerut {n}.", reply_markup=main_kb()); return
+        await message.answer(f"{name} are intervalul {lo}..{hi}. Ai cerut {n}.", reply_markup=main_kb())
+        return
 
     data = DATA_BY_BRAND.get(brand_code, {})
     item = data.get(str(n))
     if not item:
-        await message.answer(f"Nu am găsit {name} {n} în baza de date.", reply_markup=main_kb()); return
+        await message.answer(f"Nu am găsit {name} {n} în baza de date.", reply_markup=main_kb())
+        return
 
     address = item.get("address", "—")
     lat = float(item.get("lat") or 0)
@@ -338,7 +355,7 @@ async def show_item(message: Message, brand_code: str, n: int):
     opened = "🟢 Deschis acum" if (today_txt and is_open_now(today_txt)) else "🔴 Închis acum"
 
     dist_line = "📏 Distanță: — (apasă „📍 Trimite locația mea”)"
-    if message.from_user.id in user_location and lat and lon:
+    if message.from_user and message.from_user.id in user_location and lat and lon:
         u_lat, u_lon = user_location[message.from_user.id]
         km = haversine_km(u_lat, u_lon, lat, lon)
         dist_line = f"📏 Distanță: ~{km:.2f} km"
@@ -356,21 +373,21 @@ async def show_item(message: Message, brand_code: str, n: int):
     if lat and lon:
         await message.answer_location(latitude=lat, longitude=lon, reply_markup=main_kb())
 
-# — /start
 @router.message(CommandStart())
 async def start(message: Message):
     print(f"[{now_hms()}] MSG {user_tag(message.from_user)} -> /start")
     await message.answer(
         "ℹ️ Cum folosești botul\n\n"
-        "1️⃣ Caută magazine – scrie l5, c30, fo70 etc. sau alege din butoane.\n"
-        "2️⃣ Detalii magazin – primești adresă, program, stare, linkuri Maps/Waze/Yandex + pin pe hartă.\n"
-        "3️⃣ 📍 Trimite locația mea – pentru distanțe exacte.\n"
-        "4️⃣ 🧭 Cale optimă – trimite o listă, ex: l5 c30 fo70.\n"
-        "5️⃣ 🏠 Meniu – revii la meniul principal.",
+        "1️⃣ Caută magazine\n"
+        "• Scrie direct: l5, c30, fo70 etc.\n"
+        "• Sau apasă lanțul și alege numărul.\n\n"
+        "2️⃣ Detalii magazin\n"
+        "• Adresă, program, deschis/închis, distanță, pin pe hartă.\n\n"
+        "3️⃣ 📍 Trimite locația mea — ca să vezi distanțele.\n\n"
+        "4️⃣ 🧭 Cale optimă — trimite o listă: l5 c30 fo70.\n",
         reply_markup=main_kb()
     )
 
-# — meniu
 @router.message(F.text == "🏠 Meniu")
 async def back_to_menu(message: Message):
     user_brand.pop(message.from_user.id, None)
@@ -382,24 +399,19 @@ async def cb_home(cb: CallbackQuery):
     await cb.answer()
     await cb.message.answer("🏠 Meniu", reply_markup=main_kb())
 
-# — locație
 @router.message(F.location)
 async def set_location(message: Message):
     user_location[message.from_user.id] = (message.location.latitude, message.location.longitude)
     await message.answer("✅ Locație salvată!", reply_markup=main_kb())
 
-# — alegere brand din butoane
-@router.message(F.text.in_(["Linella","Fidesco","Cip","Merci","Fourchette","TOT"]))
+@router.message(F.text.in_(["Linella", "Fidesco", "Cip", "Merci", "Fourchette", "TOT"]))
 async def pick_brand(message: Message):
-    code = {
-        "linella":"l","fidesco":"f","cip":"c","merci":"m","fourchette":"fo","tot":"t"
-    }[message.text.lower()]
+    code = {"linella": "l", "fidesco": "f", "cip": "c", "merci": "m", "fourchette": "fo", "tot": "t"}[message.text.lower()]
     user_brand[message.from_user.id] = code
     name, _, lo, _ = BRANDS[code]
     await message.answer(f"Lista {name} – pagina 1:", reply_markup=ReplyKeyboardRemove())
     await message.answer("Alege un număr:", reply_markup=page_kb(code, 1))
 
-# — paginare / item
 @router.callback_query(F.data.startswith("p:"))
 async def cb_page(cb: CallbackQuery):
     _, code, p = cb.data.split(":")
@@ -414,21 +426,22 @@ async def cb_item(cb: CallbackQuery):
     await cb.answer()
     await show_item(cb.message, code, int(n))
 
-# — „l5”, „fo70” etc.
-@router.message(F.text.regexp(r"(?i)^[a-z]{1,10}\s*\d{1,3}$"))
+# „l5 / f105 / fo70 …”, tolerant la spații/case
+@router.message(F.text.regexp(re.compile(r"^[A-Za-z]{1,10}\s*\d{1,3}$")))
 async def prefixed(message: Message):
-    p = parse_code_token(message.text)
-    if not p:
-        await message.answer("Exemple: l10, f105, c7, m3, fo70, t75."); return
-    code, num = p
+    tup = parse_code_token(message.text or "")
+    if not tup:
+        await message.answer("Exemple: l10, f105, c7, m3, fo70, t75.")
+        return
+    code, num = tup
     user_brand[message.from_user.id] = code
     await show_item(message, code, num)
 
-# — doar număr (folosește brandul curent sau Linella)
-@router.message(F.text.regexp(r"^\d{1,3}$"))
+# doar număr => folosește brandul curent (default Linella)
+@router.message(F.text.regexp(re.compile(r"^\d{1,3}$")))
 async def only_number(message: Message):
     code = user_brand.get(message.from_user.id, "l")
-    await show_item(message, code, int(message.text.strip()))
+    await show_item(message, code, int((message.text or "").strip()))
 
 # ─────────────────────────────────────────────────────────
 # Cale optimă
@@ -445,13 +458,13 @@ async def route_from_location(cb: CallbackQuery):
     if loc:
         await cb.message.answer(
             f"📍 Origine: {loc[0]:.6f}, {loc[1]:.6f}\nTrimite lista (ex: l5 c30 fo70).",
-            reply_markup=ReplyKeyboardRemove()
+            reply_markup=ReplyKeyboardRemove(),
         )
     else:
         await cb.message.answer(
             "Trimite lista de magazine (ex: l5 c30 fo70).\n"
             "Originea va fi locația ta (apasă întâi „📍 Trimite locația mea”).",
-            reply_markup=ReplyKeyboardRemove()
+            reply_markup=ReplyKeyboardRemove(),
         )
 
 @router.callback_query(F.data == "route:first")
@@ -460,28 +473,33 @@ async def route_from_first(cb: CallbackQuery):
     await cb.answer()
     await cb.message.answer(
         "Trimite lista de magazine (ex: l5 c30 fo70). Originea va fi **primul magazin** din listă.",
-        reply_markup=ReplyKeyboardRemove()
+        reply_markup=ReplyKeyboardRemove(),
     )
 
-@router.message(F.text.regexp(r"(?i)(?:^| )([a-z]{1,10}\s*\d{1,3})(?:[ ,;|]+[a-z]{1,10}\s*\d{1,3})+"))
+# Linie cu ≥ 2 coduri: "l5 c30 fo70"
+_MULTI_RGX = re.compile(r"(?i)(?:^| )([a-z]{1,10}\s*\d{1,3})(?:[ ,;|]+[a-z]{1,10}\s*\d{1,3})+")
+
+@router.message(F.text.regexp(_MULTI_RGX))
 async def route_codes(message: Message):
     await codes_or_route(message)
 
 async def codes_or_route(message: Message):
-    print(f"[{now_hms()}] MSG {user_tag(message.from_user)} -> {message.text!r}")
+    print(f"[{now_hms()}] MSG {user_tag(message.from_user)} -> {repr(message.text)}")
 
     pairs = parse_codes_line(message.text or "")
     if not pairs:
-        await message.answer("Format invalid. Exemplu: l5 c30 fo70", reply_markup=main_kb()); return
+        await message.answer("Format invalid. Exemplu: l5 c30 fo70", reply_markup=main_kb())
+        return
 
-    # transformat în (lat,lon) + titluri
-    pts: List[Tuple[float,float]] = []
+    pts: List[Tuple[float, float]] = []
     titles: List[str] = []
     for code, num in pairs:
         d = DATA_BY_BRAND.get(code, {}).get(str(num))
-        if not d: continue
+        if not d:
+            continue
         lat, lon = float(d.get("lat") or 0), float(d.get("lon") or 0)
-        if not lat or not lon: continue
+        if not lat or not lon:
+            continue
         name = BRANDS[code][0]
         address = d.get("address") or ""
         titles.append(f"{name} {num} – {address}")
@@ -500,7 +518,8 @@ async def codes_or_route(message: Message):
     if mode == "loc":
         origin = user_location.get(message.from_user.id)
         if not origin:
-            await message.answer("Trimite mai întâi locația (butonul „📍 Trimite locația mea”).", reply_markup=main_kb()); return
+            await message.answer("Trimite mai întâi locația (butonul „📍 Trimite locația mea”).", reply_markup=main_kb())
+            return
         points = pts[:]  # toți sunt destinații
     else:
         origin = pts[0]
@@ -508,7 +527,7 @@ async def codes_or_route(message: Message):
 
     order, total_sec = await directions_optimize(origin, points)
 
-    ordered_pts: List[Tuple[float,float]] = []
+    ordered_pts: List[Tuple[float, float]] = []
     ordered_titles: List[str] = []
     if mode == "loc":
         for i in order:
@@ -519,16 +538,19 @@ async def codes_or_route(message: Message):
         ordered_titles.append(titles[0])
         for idx in order:
             ordered_pts.append(points[idx])
-            ordered_titles.append(titles[idx+1])
+            ordered_titles.append(titles[idx + 1])
 
-    mins = max(1, round(total_sec/60))
+    mins = max(1, round(total_sec / 60))
     head = f"🚦 Rută optimizată (trafic actual):\nDurată estimată: ~{mins}m\n\n"
     body = "\n".join(f"{i}. {t}" for i, t in enumerate(ordered_titles, 1))
-    await message.answer(head + body, reply_markup=links_kb_route(origin if mode=="loc" else None, ordered_pts))
+    await message.answer(head + body, reply_markup=links_kb_route(origin if mode == "loc" else None, ordered_pts))
+
     lat, lon = ordered_pts[-1]
     await message.answer_location(latitude=lat, longitude=lon, reply_markup=main_kb())
 
-# — catch-all log (nu răspunde, doar loghează)
+# ─────────────────────────────────────────────────────────
+# Catch-all: log (nu răspunde; previne “update not handled”)
+# ─────────────────────────────────────────────────────────
 @router.message()
 async def log_everything(message: Message):
     ctype = getattr(message, "content_type", "unknown")
@@ -539,26 +561,3 @@ async def log_everything(message: Message):
     else:
         payload = "<non-text>"
     print(f"[{now_hms()}] MSG {user_tag(message.from_user)} [{ctype}] -> {payload}")
-
-# ─────────────────────────────────────────────────────────
-# Runner local (doar dacă vrei să testezi cu polling)
-# ─────────────────────────────────────────────────────────
-if __name__ == "__main__":
-    # rulează doar local, nu pe Render (Render folosește server.py + webhook)
-    import asyncio
-    from aiogram import Bot, Dispatcher
-
-    if not BOT_TOKEN:
-        raise SystemExit("❌ Lipsă TELEGRAM_TOKEN pentru rulare locală.")
-
-    async def _main():
-        from aiogram.client.default import DefaultBotProperties
-        bot = Bot(BOT_TOKEN, default=DefaultBotProperties(parse_mode="HTML"))
-        await bot.delete_webhook(drop_pending_updates=True)
-        dp = Dispatcher()
-        dp.include_router(router)
-        print(f"[{now_hms()}] ✅ Bot (polling) ready.")
-        await dp.start_polling(bot, allowed_updates=["message","callback_query"])
-
-    os.environ.setdefault("SSL_CERT_FILE", certifi.where())
-    asyncio.run(_main())
