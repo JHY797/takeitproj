@@ -1,4 +1,4 @@
-# server.py — minimal & robust (Aiogram 3.22 + FastAPI + webhook)
+# server.py — Aiogram 3.22 + FastAPI (webhook, un singur Bot creat aici)
 import os, logging
 from fastapi import FastAPI, Request, HTTPException
 from aiogram import Bot, Dispatcher
@@ -8,12 +8,12 @@ from aiogram.types import Update
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger("server")
 
-# 1) Un singur Bot — din TELEGRAM_TOKEN (setat pe Render → Environment)
+# 1) Un singur Bot — din TELEGRAM_TOKEN (Render → Environment)
 TOKEN = os.environ["TELEGRAM_TOKEN"]
 bot = Bot(TOKEN, default=DefaultBotProperties(parse_mode="HTML"))
 
-# 2) Dispatcher + router-ul tău DIN bot.py (obligatoriu)
-from bot import router  # în bot.py ai `router = Router()`
+# 2) Dispatcher + router-ul tău din bot.py
+from bot import router
 dp = Dispatcher()
 dp.include_router(router)
 log.info("[routers] Inclus router din bot.py ✅")
@@ -35,7 +35,7 @@ async def on_startup():
         await bot.set_webhook(url, drop_pending_updates=True)
         log.info(f"[startup] set_webhook -> {url}")
     else:
-        log.warning("[startup] BASE_URL/RENDER_EXTERNAL_URL lipsă — setează manual setWebhook.")
+        log.warning("[startup] BASE_URL/RENDER_EXTERNAL_URL lipsește — setează manual setWebhook.")
 
 @app.on_event("shutdown")
 async def on_shutdown():

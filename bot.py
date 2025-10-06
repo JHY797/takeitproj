@@ -9,7 +9,7 @@ import certifi, aiohttp
 from dotenv import load_dotenv
 
 from aiogram import Bot, Dispatcher, F, Router
-from aiogram.filters import CommandStart
+from aiogram.filters import CommandStart, Command
 from aiogram.types import (
     Message, CallbackQuery,
     ReplyKeyboardMarkup, KeyboardButton,
@@ -22,17 +22,15 @@ from aiogram.utils.keyboard import InlineKeyboardBuilder
 # Config & setup
 # ─────────────────────────────────────────────────────────
 load_dotenv()
-BOT_TOKEN = os.getenv("TELEGRAM_TOKEN")  # Render folosește TELEGRAM_TOKEN
-GOOGLE_KEY = os.getenv("GOOGLE_API_KEY") or os.getenv("GOOGLE_KEY")
-if not BOT_TOKEN:
-    raise SystemExit("❌ Lipsă TELEGRAM_TOKEN (Render Environment)")
-
+# IMPORTANT: bot token NU se mai validează aici, ca să nu pice la import.
+# Webhook-ul creează Bot în server.py; aici doar citim cheia Google (opțională).
+GOOGLE_KEY = os.getenv("GOOGLE_API_KEY") or os.getenv("GOOGLE_KEY") or ""
 
 TZ = ZoneInfo("Europe/Chisinau")
 DATA_DIR = "data"
 
 # pagination
-PER_PAGE = 20                # până la 20 butoane / pagină
+PER_PAGE = 20
 BUTTONS_PER_ROW = 5
 
 # brand code -> (nume public, json, start, end)
@@ -47,14 +45,13 @@ BRANDS: Dict[str, Tuple[str, str, int, int]] = {
 
 # runtime state
 user_location: Dict[int, Tuple[float, float]] = {}
-user_brand: Dict[int, str] = {}                # context pentru cifre simple
-user_route_mode: Dict[int, str] = {}           # "loc" | "first"
+user_brand: Dict[int, str] = {}
+user_route_mode: Dict[int, str] = {}  # "loc" | "first"
 
 # ─────────────────────────────────────────────────────────
-# Helpers pentru log
+# Helpers
 # ─────────────────────────────────────────────────────────
 def user_tag(u) -> str:
-    """@username (#id), fallback pe nume dacă nu are username."""
     uname = f"@{u.username}" if getattr(u, "username", None) else f"{u.first_name or ''} {u.last_name or ''}".strip()
     if not uname:
         uname = "<no-username>"
@@ -202,15 +199,13 @@ def page_kb(brand_code: str, page: int) -> InlineKeyboardMarkup:
     return kb.as_markup()
 
 # ─────────────────────────────────────────────────────────
-# Directions API (cu SSL certifi + retry + fallback local)
+# Directions API (cu retry + fallback)
 # ─────────────────────────────────────────────────────────
 async def directions_optimize(origin: Tuple[float,float],
                               points: List[Tuple[float,float]]) -> Tuple[List[int], int]:
     if not GOOGLE_KEY or not points:
-        # fallback simplu
         order = sorted(range(len(points)),
                        key=lambda i: haversine_km(origin[0], origin[1], points[i][0], points[i][1]))
-        # viteză medie 35 km/h
         km = 0.0; cur = origin
         for i in order:
             km += haversine_km(cur[0], cur[1], points[i][0], points[i][1])
@@ -219,7 +214,6 @@ async def directions_optimize(origin: Tuple[float,float],
 
     dest = points[-1]
     ways = points[:-1]
-
     params = {
         "origin": f"{origin[0]},{origin[1]}",
         "destination": f"{dest[0]},{dest[1]}",
@@ -247,12 +241,11 @@ async def directions_optimize(origin: Tuple[float,float],
                 for leg in route.get("legs", []):
                     d = leg.get("duration_in_traffic") or leg.get("duration") or {}
                     total += int(d.get("value", 0))
-                # adăugăm și ultima destinație (indexul ei este len(points)-1)
                 return (order + [len(points)-1], total)
         except Exception:
             await asyncio.sleep(0.8)
 
-    # fallback local (dacă Google a eșuat)
+    # fallback local
     order = sorted(range(len(points)),
                    key=lambda i: haversine_km(origin[0], origin[1], points[i][0], points[i][1]))
     km = 0.0; cur = origin
@@ -263,7 +256,6 @@ async def directions_optimize(origin: Tuple[float,float],
 
 def google_maps_url(origin: Optional[Tuple[float,float]],
                     ordered: List[Tuple[float,float]]) -> str:
-    # https://www.google.com/maps/dir/?api=1&origin=lat,lon&destination=lat,lon&waypoints=|lat,lon|...
     params = []
     if origin:
         params.append(("origin", f"{origin[0]},{origin[1]}"))
@@ -312,45 +304,13 @@ def links_kb_route(origin: Optional[Tuple[float,float]],
 # ─────────────────────────────────────────────────────────
 router = Router()
 
-async def show_item(message: Message, brand_code: str, n: int):
-    if brand_code not in BRANDS:
-        await message.answer("Lanț necunoscut. Folosește l/f/c/m/fo/t (ex: l10, fo70).", reply_markup=main_kb()); return
-    name, _, lo, hi = BRANDS[brand_code]
-    if not (lo <= n <= hi):
-        await message.answer(f"{name} are intervalul {lo}..{hi}. Ai cerut {n}.", reply_markup=main_kb()); return
-
-    data = DATA_BY_BRAND.get(brand_code, {})
-    item = data.get(str(n))
-    if not item:
-        await message.answer(f"Nu am găsit {name} {n} în baza de date.", reply_markup=main_kb()); return
-
-    address = item.get("address", "—")
-    lat = float(item.get("lat") or 0)
-    lon = float(item.get("lon") or 0)
-    hours = item.get("hours", {}) or {}
-    today = today_key()
-    today_txt = hours.get(today, "")
-    opened = "🟢 Deschis acum" if (today_txt and is_open_now(today_txt)) else "🔴 Închis acum"
-
-    dist_line = "📏 Distanță: — (apasă „📍 Trimite locația mea”)"
-    if message.from_user.id in user_location and lat and lon:
-        u_lat, u_lon = user_location[message.from_user.id]
-        km = haversine_km(u_lat, u_lon, lat, lon)
-        dist_line = f"📏 Distanță: ~{km:.2f} km"
-
-    text = (
-        f"🏪 {name} {n}\n"
-        f"📍 {address}\n"
-        f"📌 Coordonate: {lat:.6f}, {lon:.6f}\n"
-        f"{dist_line}\n\n"
-        f"{opened}\n"
-        f"🕒 Program (azi: {today_txt or '—'})\n\n"
-        f"{format_hours(hours)}"
-    )
-    # mesaj + butoane link + pin
-    await message.answer(text, reply_markup=links_kb_single(lat, lon))
-    if lat and lon:
-        await message.answer_location(latitude=lat, longitude=lon, reply_markup=main_kb())
+# Canare de debug (utile dacă ceva nu răspunde)
+@router.message(Command("ping"))
+async def ping_cmd(message: Message):
+    try:
+        await message.answer("pong ✅")
+    except Exception as e:
+        print("[SEND ERROR /ping]", repr(e))
 
 def brand_from_text(t: str) -> Optional[str]:
     return normalize_brand(t.strip().lower())
@@ -464,14 +424,12 @@ async def route_codes(message: Message):
     await codes_or_route(message)
 
 async def codes_or_route(message: Message):
-    # log cu username + ID pentru orice listă de coduri
     print(f"[{now_hms()}] MSG {user_tag(message.from_user)} -> {message.text!r}")
 
     pairs = parse_codes_line(message.text or "")
     if not pairs:
         await message.answer("Format invalid. Exemplu: l5 c30 fo70", reply_markup=main_kb()); return
 
-    # transformă în puncte (lat, lon) + titluri
     pts: List[Tuple[float,float]] = []
     titles: List[str] = []
     for code, num in pairs:
@@ -485,7 +443,6 @@ async def codes_or_route(message: Message):
         pts.append((lat, lon))
 
     if len(pts) < 2:
-        # dacă e un singur punct, afișăm ca „detalii” simple
         if pts:
             lat, lon = pts[0]
             await message.answer("\n".join(titles), reply_markup=links_kb_single(lat, lon))
@@ -499,13 +456,12 @@ async def codes_or_route(message: Message):
         origin = user_location.get(message.from_user.id)
         if not origin:
             await message.answer("Trimite mai întâi locația (butonul „📍 Trimite locația mea”).", reply_markup=main_kb()); return
-        points = pts[:]  # toți sunt destinații
+        points = pts[:]
     else:
         origin = pts[0]
         points = pts[1:]
 
     order, total_sec = await directions_optimize(origin, points)
-    # reconstruim lista ordonată (punctele de vizitat în ordine)
     ordered_pts: List[Tuple[float,float]] = []
     ordered_titles: List[str] = []
     if mode == "loc":
@@ -513,11 +469,9 @@ async def codes_or_route(message: Message):
             ordered_pts.append(points[i])
             ordered_titles.append(titles[i])
     else:
-        # primul rămâne primul
         ordered_pts.append(origin)
         ordered_titles.append(titles[0])
         for idx in order:
-            # +1 pentru că am scos primul la „points”
             ordered_pts.append(points[idx])
             ordered_titles.append(titles[idx+1])
 
@@ -525,12 +479,11 @@ async def codes_or_route(message: Message):
     head = f"🚦 Rută optimizată (trafic actual):\nDurată estimată: ~{mins}m\n\n"
     body = "\n".join(f"{i}. {t}" for i, t in enumerate(ordered_titles, 1))
     await message.answer(head + body, reply_markup=links_kb_route(origin if mode=="loc" else None, ordered_pts))
-    # trimitem și harta ultimului punct, ca să poți naviga nativ
     lat, lon = ordered_pts[-1]
     await message.answer_location(latitude=lat, longitude=lon, reply_markup=main_kb())
 
 # ─────────────────────────────────────────────────────────
-# Catch-all: loghează ORICE mesaj (text sau non-text)
+# Catch-all
 # ─────────────────────────────────────────────────────────
 @router.message()
 async def log_everything(message: Message):
@@ -542,23 +495,21 @@ async def log_everything(message: Message):
     else:
         payload = "<non-text>"
     print(f"[{now_hms()}] MSG {user_tag(message.from_user)} [{ctype}] -> {payload}")
-    # nu răspundem aici; doar log
 
 # ─────────────────────────────────────────────────────────
-# Runner
+# Runner (doar pentru rulare locală cu polling)
 # ─────────────────────────────────────────────────────────
 async def main():
-    # previne conflictul „terminated by other getUpdates request”
-
+    token = os.getenv("TELEGRAM_TOKEN") or os.getenv("BOT_TOKEN") or os.getenv("TELEGRAM_BOT_TOKEN")
+    if not token:
+        raise SystemExit("❌ Lipsă token Telegram pentru rulare locală.")
+    bot = Bot(token)
     await bot.delete_webhook(drop_pending_updates=True)
-
     dp = Dispatcher()
     dp.include_router(router)
-
-    print(f"[{now_hms()}] ✅ Bot ready (rapid, inline, fără flood).")
+    print(f"[{now_hms()}] ✅ Bot ready (polling local).")
     await dp.start_polling(bot, allowed_updates=["message","callback_query"])
 
 if __name__ == "__main__":
-    # asigură bundle-ul de certificate în mediul curent (pentru Directions)
     os.environ.setdefault("SSL_CERT_FILE", certifi.where())
     asyncio.run(main())
