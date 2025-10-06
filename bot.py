@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import os, re, ssl, json, math, asyncio, datetime as dt
+import os, re, ssl, json, math, asyncio, datetime as dt, traceback
 from typing import Dict, Any, Tuple, List, Optional
 from zoneinfo import ZoneInfo
 
@@ -22,12 +22,20 @@ from aiogram.utils.keyboard import InlineKeyboardBuilder
 # Config & setup
 # ─────────────────────────────────────────────────────────
 load_dotenv()
-# IMPORTANT: bot token NU se mai validează aici, ca să nu pice la import.
-# Webhook-ul creează Bot în server.py; aici doar citim cheia Google (opțională).
+# nu creăm Bot aici; îl creează server.py
 GOOGLE_KEY = os.getenv("GOOGLE_API_KEY") or os.getenv("GOOGLE_KEY") or ""
 
 TZ = ZoneInfo("Europe/Chisinau")
 DATA_DIR = "data"
+
+HELP_TEXT = (
+    "ℹ️ Cum folosești botul\n\n"
+    "1) Caută magazine\n• l5, c30, fo70 etc.\n• Sau apasă butoanele.\n\n"
+    "2) Detalii magazin\n• Adresă, program, deschis/închis, distanță.\n\n"
+    "3) 📍 Trimite locația mea\n• Ca să vezi distanța.\n\n"
+    "4) 🧭 Cale optimă\n• Exemplu: l5 c30 fo70 (de la locația ta sau primul punct).\n\n"
+    "Comenzi: /start, /help, /menu, /ping"
+)
 
 # pagination
 PER_PAGE = 20
@@ -175,6 +183,7 @@ def route_mode_kb() -> InlineKeyboardMarkup:
 def page_kb(brand_code: str, page: int) -> InlineKeyboardMarkup:
     _, _, lo, hi = BRANDS[brand_code]
     max_num = MAX_BY_BRAND.get(brand_code, hi)
+    page = max(1, page)
     start = lo + (page-1)*PER_PAGE
     end   = min(max_num, hi, start + PER_PAGE - 1)
     if start > end:
@@ -199,7 +208,7 @@ def page_kb(brand_code: str, page: int) -> InlineKeyboardMarkup:
     return kb.as_markup()
 
 # ─────────────────────────────────────────────────────────
-# Directions API (cu retry + fallback)
+# Directions API (retry + fallback)
 # ─────────────────────────────────────────────────────────
 async def directions_optimize(origin: Tuple[float,float],
                               points: List[Tuple[float,float]]) -> Tuple[List[int], int]:
@@ -296,7 +305,7 @@ def links_kb_route(origin: Optional[Tuple[float,float]],
         InlineKeyboardButton(text="🚗 Waze (destinație)",        url=waze_url(lat, lon)),
         InlineKeyboardButton(text="🧭 Yandex Maps (destinație)", url=yandex_url(lat, lon)),
     ],[
-        InlineKeyboardButton(text="🏠 Revino la meniu", callback_data="home")
+        InlineKeyboardButton(text="🏠 Meniu", callback_data="home")
     ]])
 
 # ─────────────────────────────────────────────────────────
@@ -304,33 +313,22 @@ def links_kb_route(origin: Optional[Tuple[float,float]],
 # ─────────────────────────────────────────────────────────
 router = Router()
 
-# Canare de debug (utile dacă ceva nu răspunde)
 @router.message(Command("ping"))
 async def ping_cmd(message: Message):
-    try:
-        await message.answer("pong ✅")
-    except Exception as e:
-        print("[SEND ERROR /ping]", repr(e))
+    await message.answer("pong ✅")
 
-
-# ─────────────────────────────────────────────────────────
-# Afișează informațiile despre un magazin (folosit de mai multe comenzi)
-# ─────────────────────────────────────────────────────────
+# ----- SHOW ITEM (pus înainte de folosire de alte handlers)
 async def show_item(message: Message, brand_code: str, n: int):
     if brand_code not in BRANDS:
-        await message.answer("Lanț necunoscut. Folosește l/f/c/m/fo/t (ex: l10, fo70).", reply_markup=main_kb())
-        return
-
+        await message.answer("Lanț necunoscut. Folosește l/f/c/m/fo/t (ex: l10, fo70).", reply_markup=main_kb()); return
     name, _, lo, hi = BRANDS[brand_code]
     if not (lo <= n <= hi):
-        await message.answer(f"{name} are intervalul {lo}..{hi}. Ai cerut {n}.", reply_markup=main_kb())
-        return
+        await message.answer(f"{name} are intervalul {lo}..{hi}. Ai cerut {n}.", reply_markup=main_kb()); return
 
     data = DATA_BY_BRAND.get(brand_code, {})
     item = data.get(str(n))
     if not item:
-        await message.answer(f"Nu am găsit {name} {n} în baza de date.", reply_markup=main_kb())
-        return
+        await message.answer(f"Nu am găsit {name} {n} în baza de date.", reply_markup=main_kb()); return
 
     address = item.get("address", "—")
     lat = float(item.get("lat") or 0)
@@ -355,11 +353,22 @@ async def show_item(message: Message, brand_code: str, n: int):
         f"🕒 Program (azi: {today_txt or '—'})\n\n"
         f"{format_hours(hours)}"
     )
-
     await message.answer(text, reply_markup=links_kb_single(lat, lon))
     if lat and lon:
         await message.answer_location(latitude=lat, longitude=lon, reply_markup=main_kb())
 
+def main_kb() -> ReplyKeyboardMarkup:
+    return ReplyKeyboardMarkup(
+        keyboard=[
+            [KeyboardButton(text="Linella"),    KeyboardButton(text="Fidesco")],
+            [KeyboardButton(text="Cip"),        KeyboardButton(text="Merci")],
+            [KeyboardButton(text="Fourchette"), KeyboardButton(text="TOT")],
+            [KeyboardButton(text="📍 Trimite locația mea", request_location=True)],
+            [KeyboardButton(text="🧭 Cale optimă"), KeyboardButton(text="🏠 Meniu")],
+        ],
+        resize_keyboard=True,
+        is_persistent=True
+    )
 
 def brand_from_text(t: str) -> Optional[str]:
     return normalize_brand(t.strip().lower())
@@ -367,29 +376,16 @@ def brand_from_text(t: str) -> Optional[str]:
 @router.message(CommandStart())
 async def start(message: Message):
     print(f"[{now_hms()}] MSG {user_tag(message.from_user)} -> /start")
-    await message.answer("""ℹ️ Cum folosești botul
+    await message.answer(HELP_TEXT, reply_markup=main_kb())
 
-1️⃣ Caută magazine  
-• Scrie direct codul: l5, c30, fo70 etc.  
-• Sau apasă lanțul dorit (Linella, Fidesco, Cip, Merci, TOT, Fourchette) și alege numărul.  
+@router.message(Command("help"))
+async def help_cmd(message: Message):
+    await message.answer(HELP_TEXT, reply_markup=main_kb())
 
-2️⃣ Detalii magazin  
-• Primești adresa, programul și starea (🟢 Deschis / 🔴 Închis).  
-• Vezi distanța față de tine dacă ai trimis locația.  
-• Link-uri rapide: Google Maps, Waze, Yandex Maps + pin pe hartă.  
-
-3️⃣ 📍 Trimite locația mea  
-• Salvează poziția ta curentă.  
-• De acum vezi distanța exactă până la magazine.  
-
-4️⃣ 🧭 Cale optimă  
-• Alege ruta de la locația ta sau de la primul magazin din listă.  
-• Scrie codurile (ex: l5 c30 fo70).  
-• Primești ruta optimizată cu durata estimată + linkuri Maps/Waze/Yandex.  
-
-5️⃣ 🏠 Meniu  
-• Revii oricând la meniul principal.
-""", reply_markup=main_kb())
+@router.message(Command("menu"))
+async def menu_cmd(message: Message):
+    user_brand.pop(message.from_user.id, None)
+    await message.answer("Alege un lanț:", reply_markup=main_kb())
 
 @router.message(F.text == "🏠 Meniu")
 async def back_to_menu(message: Message):
@@ -532,8 +528,13 @@ async def codes_or_route(message: Message):
     await message.answer_location(latitude=lat, longitude=lon, reply_markup=main_kb())
 
 # ─────────────────────────────────────────────────────────
-# Catch-all
+# Catch-all — pentru text necunoscut răspunde politicos cu help.
+# Non-text doar log.
 # ─────────────────────────────────────────────────────────
+@router.message(F.text)
+async def unknown_text(message: Message):
+    await message.answer("Nu am înțeles. 😊\n\n" + HELP_TEXT, reply_markup=main_kb())
+
 @router.message()
 async def log_everything(message: Message):
     ctype = getattr(message, "content_type", "unknown")
@@ -546,7 +547,7 @@ async def log_everything(message: Message):
     print(f"[{now_hms()}] MSG {user_tag(message.from_user)} [{ctype}] -> {payload}")
 
 # ─────────────────────────────────────────────────────────
-# Runner (doar pentru rulare locală cu polling)
+# Runner doar pentru test local (polling)
 # ─────────────────────────────────────────────────────────
 async def main():
     token = os.getenv("TELEGRAM_TOKEN") or os.getenv("BOT_TOKEN") or os.getenv("TELEGRAM_BOT_TOKEN")
