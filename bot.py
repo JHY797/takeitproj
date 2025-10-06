@@ -23,6 +23,7 @@ from aiogram.utils.keyboard import InlineKeyboardBuilder
 # ─────────────────────────────────────────────────────────
 load_dotenv()
 BOT_TOKEN = os.getenv("TELEGRAM_TOKEN")  # Render folosește TELEGRAM_TOKEN
+GOOGLE_KEY = os.getenv("GOOGLE_API_KEY") or os.getenv("GOOGLE_KEY")
 if not BOT_TOKEN:
     raise SystemExit("❌ Lipsă TELEGRAM_TOKEN (Render Environment)")
 
