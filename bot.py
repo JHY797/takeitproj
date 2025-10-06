@@ -312,6 +312,55 @@ async def ping_cmd(message: Message):
     except Exception as e:
         print("[SEND ERROR /ping]", repr(e))
 
+
+# ─────────────────────────────────────────────────────────
+# Afișează informațiile despre un magazin (folosit de mai multe comenzi)
+# ─────────────────────────────────────────────────────────
+async def show_item(message: Message, brand_code: str, n: int):
+    if brand_code not in BRANDS:
+        await message.answer("Lanț necunoscut. Folosește l/f/c/m/fo/t (ex: l10, fo70).", reply_markup=main_kb())
+        return
+
+    name, _, lo, hi = BRANDS[brand_code]
+    if not (lo <= n <= hi):
+        await message.answer(f"{name} are intervalul {lo}..{hi}. Ai cerut {n}.", reply_markup=main_kb())
+        return
+
+    data = DATA_BY_BRAND.get(brand_code, {})
+    item = data.get(str(n))
+    if not item:
+        await message.answer(f"Nu am găsit {name} {n} în baza de date.", reply_markup=main_kb())
+        return
+
+    address = item.get("address", "—")
+    lat = float(item.get("lat") or 0)
+    lon = float(item.get("lon") or 0)
+    hours = item.get("hours", {}) or {}
+    today = today_key()
+    today_txt = hours.get(today, "")
+    opened = "🟢 Deschis acum" if (today_txt and is_open_now(today_txt)) else "🔴 Închis acum"
+
+    dist_line = "📏 Distanță: — (apasă „📍 Trimite locația mea”)"
+    if message.from_user.id in user_location and lat and lon:
+        u_lat, u_lon = user_location[message.from_user.id]
+        km = haversine_km(u_lat, u_lon, lat, lon)
+        dist_line = f"📏 Distanță: ~{km:.2f} km"
+
+    text = (
+        f"🏪 {name} {n}\n"
+        f"📍 {address}\n"
+        f"📌 Coordonate: {lat:.6f}, {lon:.6f}\n"
+        f"{dist_line}\n\n"
+        f"{opened}\n"
+        f"🕒 Program (azi: {today_txt or '—'})\n\n"
+        f"{format_hours(hours)}"
+    )
+
+    await message.answer(text, reply_markup=links_kb_single(lat, lon))
+    if lat and lon:
+        await message.answer_location(latitude=lat, longitude=lon, reply_markup=main_kb())
+
+
 def brand_from_text(t: str) -> Optional[str]:
     return normalize_brand(t.strip().lower())
 
