@@ -9,10 +9,12 @@ import aiohttp, certifi
 from dotenv import load_dotenv
 
 from aiogram import Router, F
-from aiogram.types import (Message, CallbackQuery,
-                           ReplyKeyboardMarkup, KeyboardButton,
-                           InlineKeyboardMarkup, InlineKeyboardButton,
-                           ReplyKeyboardRemove)
+from aiogram.types import (
+    Message, CallbackQuery,
+    ReplyKeyboardMarkup, KeyboardButton,
+    InlineKeyboardMarkup, InlineKeyboardButton,
+    ReplyKeyboardRemove,
+)
 from aiogram.filters import CommandStart
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
@@ -28,6 +30,10 @@ if not BOT_TOKEN:
 
 TZ = ZoneInfo("Europe/Chisinau")
 DATA_DIR = "data"
+
+# Acasă (buton dedicat)
+HOME_LAT = 46.995953742189705
+HOME_LON = 28.903641724548
 
 # Paginare
 PER_PAGE = 20
@@ -112,10 +118,10 @@ def format_hours(hours: Dict[str, str]) -> str:
     names = ["Luni","Marți","Miercuri","Joi","Vineri","Sâmbătă","Duminică"]
     return "\n".join(f"{n}: {hours.get(k,'') or '—'}" for k,n in zip(order, names))
 
-# parsare brand + număr (“l5”, “L 5”, “i10”, “fo70”)
+# parsare brand + număr
 def normalize_brand(s: str) -> Optional[str]:
     s = s.lower().strip()
-    s = s.replace("î", "i").replace("ă", "a").replace("â", "a").replace("ș","s").replace("ţ","t").replace("ț","t")
+    s = s.replace("î","i").replace("ă","a").replace("â","a").replace("ș","s").replace("ţ","t").replace("ț","t")
     if s in BRANDS: return s
     if s in ("l","lin","line","linella"): return "l"
     if s in ("f","fid","fide","fidesco"): return "f"
@@ -130,8 +136,7 @@ def parse_code_token(tok: str) -> Optional[Tuple[str,int]]:
     m = _CODE_RE.fullmatch(tok or "")
     if not m: return None
     raw_brand = m.group(1)
-    # pe iPhone “I” poate înlocui L; reparăm
-    if raw_brand.lower() in ("i","l"): raw_brand = "l"
+    if raw_brand.lower() in ("i","l"): raw_brand = "l"  # repară „I” pentru Linella
     code = normalize_brand(raw_brand)
     if not code: return None
     return code, int(m.group(2))
@@ -215,7 +220,6 @@ async def directions_optimize(origin: Tuple[float,float],
         used[best] = True
         out.append(best)
         cur = points[best]
-    # estimare timp (sec)
     km = 0.0; cur = origin
     for i in out:
         km += haversine_km(cur[0], cur[1], points[i][0], points[i][1])
@@ -226,13 +230,14 @@ async def directions_optimize(origin: Tuple[float,float],
 # UI
 # ─────────────────────────────────────────────────────────
 def main_kb() -> ReplyKeyboardMarkup:
+    # Înlocuit „🏠 Meniu” cu „🏠 Acasă”
     return ReplyKeyboardMarkup(
         keyboard=[
             [KeyboardButton(text="Linella"), KeyboardButton(text="Fidesco")],
             [KeyboardButton(text="Cip"),     KeyboardButton(text="Merci")],
             [KeyboardButton(text="Fourchette"), KeyboardButton(text="TOT")],
             [KeyboardButton(text="📍 Trimite locația mea", request_location=True)],
-            [KeyboardButton(text="🧭 Cale optimă"), KeyboardButton(text="🏠 Meniu")],
+            [KeyboardButton(text="🧭 Cale optimă"), KeyboardButton(text="🏠 Acasă")],
         ],
         resize_keyboard=True,
         is_persistent=True
@@ -338,24 +343,27 @@ async def show_item(message: Message, brand_code: str, n: int):
 async def start(message: Message):
     print(f"[{now_hms()}] MSG {user_tag(message.from_user)} -> /start")
     await message.answer(
-        "Salut! Alege un lanț sau scrie coduri (ex: `l5`, `f120`, `fo70`).\n"
-        "Poți trimite locația pentru distanțe și rute.",
+        "Salut! Alege un lanț sau scrie coduri (ex: l5, f120, fo70).\n"
+        "Poți trimite locația pentru distanțe și rute.\n"
+        "Butonul „🏠 Acasă” deschide harta la adresa salvată.",
         reply_markup=main_kb()
     )
 
-# Meniu / reset
-@router.message(F.text == "🏠 Meniu")
-async def back_to_menu(message: Message):
-    user_brand.pop(message.from_user.id, None)
-    user_route_mode.pop(message.from_user.id, None)
-    await message.answer("Alege un lanț:", reply_markup=main_kb())
+# „🏠 Acasă” — trimite linkuri + pin la coordonatele fixe
+@router.message(F.text == "🏠 Acasă")
+async def go_home(message: Message):
+    await message.answer(
+        "🏠 Locație Acasă\n"
+        f"📌 Coordonate: {HOME_LAT:.6f}, {HOME_LON:.6f}",
+        reply_markup=links_kb_single(HOME_LAT, HOME_LON)
+    )
+    await message.answer_location(latitude=HOME_LAT, longitude=HOME_LON, reply_markup=main_kb())
 
+# Callback „home” (din inline) → doar readuce tastatura
 @router.callback_query(F.data == "home")
 async def cb_home(cb: CallbackQuery):
-    user_brand.pop(cb.from_user.id, None)
-    user_route_mode.pop(cb.from_user.id, None)
     await cb.answer()
-    await cb.message.answer("🏠 Meniu", reply_markup=main_kb())
+    await cb.message.answer("Tastatură readusă.", reply_markup=main_kb())
 
 # Salvează locația
 @router.message(F.location)
@@ -418,7 +426,7 @@ async def cb_item(cb: CallbackQuery):
     await cb.answer()
     await show_item(cb.message, code, int(n))
 
-# Shortcut „l5 / fo70 / i10 …”
+# Shortcut „l5 / fo70 …”
 @router.message(F.text.regexp(r"(?i)^[a-z]{1,10}\s*\d{1,3}$"))
 async def prefixed(message: Message):
     p = parse_code_token(message.text)
@@ -442,7 +450,7 @@ async def ask_route_mode(message: Message):
     ],[
         InlineKeyboardButton(text="🚩 De la primul magazin", callback_data="route:first"),
     ],[
-        InlineKeyboardButton(text="🏠 Meniu", callback_data="home")
+        InlineKeyboardButton(text="🏠 Revino la meniu", callback_data="home")
     ]])
     await message.answer("Alege modul pentru rută optimă:", reply_markup=kb)
 
@@ -522,7 +530,7 @@ async def route_codes(message: Message):
     lat, lon = ordered_pts[-1]
     await message.answer_location(latitude=lat, longitude=lon, reply_markup=main_kb())
 
-# Catch-all log (nu răspunde, doar previne “not handled”)
+# Catch-all log
 @router.message()
 async def log_everything(message: Message):
     ctype = getattr(message, "content_type", "unknown")
