@@ -31,9 +31,23 @@ if not BOT_TOKEN:
 TZ = ZoneInfo("Europe/Chisinau")
 DATA_DIR = "data"
 
-# Acasă (buton dedicat)
+# Acasă (coordonate păstrate pentru meniul de mentenanță)
 HOME_LAT = 46.995953742189705
 HOME_LON = 28.903641724548
+
+# Locații Mentenanță
+MENT_HOME_NAME = "Acasă"
+MENT_TAKEIT_NAME = "Take IT depo"
+MENT_TAKEIT_LAT = 46.995234693707985
+MENT_TAKEIT_LON = 28.903614191014114
+
+MENT_FRUCTE_NAME = "Fructe Legume Depo"
+MENT_FRUCTE_LAT = 46.99205105508518
+MENT_FRUCTE_LON = 28.88559278022606
+
+MENT_REZOMEDIA_NAME = "Rezomedia"
+MENT_REZOMEDIA_LAT = 47.01492352451698
+MENT_REZOMEDIA_LON = 28.85564912784494
 
 # Paginare
 PER_PAGE = 20
@@ -230,14 +244,14 @@ async def directions_optimize(origin: Tuple[float,float],
 # UI
 # ─────────────────────────────────────────────────────────
 def main_kb() -> ReplyKeyboardMarkup:
-    # Înlocuit „🏠 Meniu” cu „🏠 Acasă”
+    # Am înlocuit „🏠 Acasă” cu „🛠️ Mentenanta”
     return ReplyKeyboardMarkup(
         keyboard=[
             [KeyboardButton(text="Linella"), KeyboardButton(text="Fidesco")],
             [KeyboardButton(text="Cip"),     KeyboardButton(text="Merci")],
             [KeyboardButton(text="Fourchette"), KeyboardButton(text="TOT")],
             [KeyboardButton(text="📍 Trimite locația mea", request_location=True)],
-            [KeyboardButton(text="🧭 Cale optimă"), KeyboardButton(text="🏠 Acasă")],
+            [KeyboardButton(text="🧭 Cale optimă"), KeyboardButton(text="🛠️ Mentenanta")],
         ],
         resize_keyboard=True,
         is_persistent=True
@@ -292,6 +306,15 @@ def links_kb_route(origin: Optional[Tuple[float,float]],
         InlineKeyboardButton(text="🏠 Revino la meniu", callback_data="home")
     ]])
 
+def maintenance_kb() -> InlineKeyboardMarkup:
+    return InlineKeyboardMarkup(inline_keyboard=[
+        [InlineKeyboardButton(text="🏠 Acasă", callback_data="maint:home")],
+        [InlineKeyboardButton(text=f"📦 {MENT_TAKEIT_NAME}", callback_data="maint:takeit")],
+        [InlineKeyboardButton(text=f"🥕 {MENT_FRUCTE_NAME}", callback_data="maint:fructe")],
+        [InlineKeyboardButton(text=f"🏢 {MENT_REZOMEDIA_NAME}", callback_data="maint:rezomedia")],
+        [InlineKeyboardButton(text="⬅️ Înapoi la meniu", callback_data="home")],
+    ])
+
 # ─────────────────────────────────────────────────────────
 # Router & Handlers
 # ─────────────────────────────────────────────────────────
@@ -345,19 +368,11 @@ async def start(message: Message):
     await message.answer(
         "Salut! Alege un lanț sau scrie coduri (ex: l5, f120, fo70).\n"
         "Poți trimite locația pentru distanțe și rute.\n"
-        "Butonul „🏠 Acasă” deschide harta la adresa salvată.",
+        "Butonul „🛠️ Mentenanta” deschide locațiile speciale (Acasă / Depozite).",
         reply_markup=main_kb()
     )
 
-# „🏠 Acasă” — trimite linkuri + pin la coordonatele fixe
-@router.message(F.text == "🏠 Acasă")
-async def go_home(message: Message):
-    await message.answer(
-        "🏠 Locație Acasă\n"
-        f"📌 Coordonate: {HOME_LAT:.6f}, {HOME_LON:.6f}",
-        reply_markup=links_kb_single(HOME_LAT, HOME_LON)
-    )
-    await message.answer_location(latitude=HOME_LAT, longitude=HOME_LON, reply_markup=main_kb())
+# (Eliminat handler-ul vechi pentru „🏠 Acasă” din meniul principal)
 
 # Callback „home” (din inline) → doar readuce tastatura
 @router.callback_query(F.data == "home")
@@ -529,6 +544,36 @@ async def route_codes(message: Message):
     await message.answer(head + body, reply_markup=links_kb_route(origin if mode=="loc" else None, ordered_pts))
     lat, lon = ordered_pts[-1]
     await message.answer_location(latitude=lat, longitude=lon, reply_markup=main_kb())
+
+# ───── Mentenanță: meniu + acțiuni ───────────────────────
+@router.message(F.text == "🛠️ Mentenanta")
+async def open_maintenance(message: Message):
+    await message.answer(
+        "🔧 Meniu Mentenanță\n"
+        "Alege o locație pentru a deschide hărțile și a primi pin-ul:",
+        reply_markup=maintenance_kb()
+    )
+
+async def _send_loc_with_links(msg_target, title: str, lat: float, lon: float):
+    text = (
+        f"📍 {title}\n"
+        f"📌 Coordonate: {lat:.6f}, {lon:.6f}"
+    )
+    await msg_target.answer(text, reply_markup=links_kb_single(lat, lon))
+    await msg_target.answer_location(latitude=lat, longitude=lon, reply_markup=main_kb())
+
+@router.callback_query(F.data.startswith("maint:"))
+async def maintenance_actions(cb: CallbackQuery):
+    await cb.answer()
+    key = cb.data.split(":", 1)[1]
+    if key == "home":
+        await _send_loc_with_links(cb.message, "Locație Acasă", HOME_LAT, HOME_LON)
+    elif key == "takeit":
+        await _send_loc_with_links(cb.message, MENT_TAKEIT_NAME, MENT_TAKEIT_LAT, MENT_TAKEIT_LON)
+    elif key == "fructe":
+        await _send_loc_with_links(cb.message, MENT_FRUCTE_NAME, MENT_FRUCTE_LAT, MENT_FRUCTE_LON)
+    elif key == "rezomedia":
+        await _send_loc_with_links(cb.message, MENT_REZOMEDIA_NAME, MENT_REZOMEDIA_LAT, MENT_REZOMEDIA_LON)
 
 # Catch-all log
 @router.message()
