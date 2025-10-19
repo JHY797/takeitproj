@@ -12,10 +12,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": "Polenova Ecaterina",
-    "manager_email": "manager.l1@linella.md",
-    "manager_phone": "079708170"
+    }
   },
   "2": {
     "number": 2,
@@ -30,10 +27,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": "Minciuc Margareta",
-    "manager_email": "manager.l2@linella.md",
-    "manager_phone": "079700119"
+    }
   },
   "3": {
     "number": 3,
@@ -48,10 +42,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": "Popa Aliona",
-    "manager_email": "manager.l3@linella.md",
-    "manager_phone": "079257203"
+    }
   },
   "4": {
     "number": 4,
@@ -66,10 +57,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": "Cerici Maria",
-    "manager_email": "manager.l4@linella.md",
-    "manager_phone": "060808804"
+    }
   },
   "5": {
     "number": 5,
@@ -84,10 +72,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Brumaru Elena",
-    "manager_email": "manager.l5@linella.md",
-    "manager_phone": "060808805"
+    }
   },
   "6": {
     "number": 6,
@@ -102,10 +87,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Nederita Vladislav",
-    "manager_email": "manager.l6@linella.md",
-    "manager_phone": "060808806"
+    }
   },
   "7": {
     "number": 7,
@@ -120,10 +102,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Ionasco Cristina",
-    "manager_email": "manager.l7@linella.md",
-    "manager_phone": "078860141"
+    }
   },
   "8": {
     "number": 8,
@@ -138,10 +117,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Rusnac Dorina",
-    "manager_email": "manager.l8@linella.md",
-    "manager_phone": "078896108"
+    }
   },
   "9": {
     "number": 9,
@@ -156,10 +132,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "09:00–22:00"
-    },
-    "manager_name": "Besleaga Andrei",
-    "manager_email": "manager.l9@linella.md",
-    "manager_phone": "060808809"
+    }
   },
   "10": {
     "number": 10,
@@ -174,10 +147,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Luchin Natalia",
-    "manager_email": "manager.l10@linella.md",
-    "manager_phone": "060808810"
+    }
   },
   "11": {
     "number": 11,
@@ -192,10 +162,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Lisnic Axenia",
-    "manager_email": "manager.l11@linella.md",
-    "manager_phone": "076007011"
+    }
   },
   "12": {
     "number": 12,
@@ -210,10 +177,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Papusa Sergiu",
-    "manager_email": "manager.l12@linella.md",
-    "manager_phone": "060808812"
+    }
   },
   "13": {
     "number": 13,
@@ -228,10 +192,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Patrinjel Elena",
-    "manager_email": "manager.l13@linella.md",
-    "manager_phone": "078894113"
+    }
   },
   "14": {
     "number": 14,
@@ -246,10 +207,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Mardari Svetlana",
-    "manager_email": "manager.l14@linella.md",
-    "manager_phone": "060808814"
+    }
   },
   "15": {
     "number": 15,
@@ -264,10 +222,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": "Pruteanu Marinela",
-    "manager_email": "manager.l15@linella.md",
-    "manager_phone": "060808815"
+    }
   },
   "16": {
     "number": 16,
@@ -282,10 +237,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": "Gujea Ana",
-    "manager_email": "manager.l16@linella.md",
-    "manager_phone": "060808816"
+    }
   },
   "17": {
     "number": 17,
@@ -300,10 +252,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Suleac Marina",
-    "manager_email": "manager.l17@linella.md",
-    "manager_phone": "060808817"
+    }
   },
   "18": {
     "number": 18,
@@ -318,10 +267,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Prunici Maria",
-    "manager_email": "manager.l18@linella.md",
-    "manager_phone": "060808818"
+    }
   },
   "19": {
     "number": 19,
@@ -336,10 +282,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Semileac Vera",
-    "manager_email": "manager.l19@linella.md",
-    "manager_phone": "060808819"
+    }
   },
   "20": {
     "number": 20,
@@ -354,10 +297,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": "Vidrascu Ludmila",
-    "manager_email": "manager.l20@linella.md",
-    "manager_phone": "060808820"
+    }
   },
   "21": {
     "number": 21,
@@ -372,10 +312,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Datco Cristina Ilie",
-    "manager_email": "manager.l21@linella.md",
-    "manager_phone": "060808821"
+    }
   },
   "22": {
     "number": 22,
@@ -390,10 +327,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Dumitras Ecaterina",
-    "manager_email": "manager.l22@linella.md",
-    "manager_phone": "060808822"
+    }
   },
   "23": {
     "number": 23,
@@ -408,10 +342,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Ciumacenco Alina",
-    "manager_email": "manager.l23@linella.md",
-    "manager_phone": "060808823"
+    }
   },
   "24": {
     "number": 24,
@@ -426,10 +357,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Gheorghita Iurie",
-    "manager_email": "manager.l24@linella.md",
-    "manager_phone": "060808824"
+    }
   },
   "25": {
     "number": 25,
@@ -444,10 +372,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "09:00–23:00"
-    },
-    "manager_name": "Musteata Corina",
-    "manager_email": "manager.l25@linella.md",
-    "manager_phone": "060808825"
+    }
   },
   "26": {
     "number": 26,
@@ -462,10 +387,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Cechina Ion",
-    "manager_email": "manager.l26@linella.md",
-    "manager_phone": "060808826"
+    }
   },
   "27": {
     "number": 27,
@@ -480,10 +402,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Hincu Rodica",
-    "manager_email": "manager.l27@linella.md",
-    "manager_phone": "060808827"
+    }
   },
   "28": {
     "number": 28,
@@ -498,10 +417,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Telipiz Ecaterina",
-    "manager_email": "manager.l28@linella.md",
-    "manager_phone": "060808828"
+    }
   },
   "29": {
     "number": 29,
@@ -516,10 +432,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": "Sari Tatiana",
-    "manager_email": "manager.l29@linella.md",
-    "manager_phone": "060808829"
+    }
   },
   "30": {
     "number": 30,
@@ -534,10 +447,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Siscova Svetlana",
-    "manager_email": "manager.l30@linella.md",
-    "manager_phone": "060808830"
+    }
   },
   "31": {
     "number": 31,
@@ -552,10 +462,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": "Aprodu Nicolae",
-    "manager_email": "manager.l31@linella.md",
-    "manager_phone": "060808831"
+    }
   },
   "32": {
     "number": 32,
@@ -570,10 +477,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": "Ghiletchi Alexandru",
-    "manager_email": "manager.l32@linella.md",
-    "manager_phone": "060808832"
+    }
   },
   "33": {
     "number": 33,
@@ -588,10 +492,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": "Rotaru Veronica",
-    "manager_email": "manager.l33@linella.md",
-    "manager_phone": "060808833"
+    }
   },
   "34": {
     "number": 34,
@@ -606,10 +507,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Popa Xenia",
-    "manager_email": "manager.l34@linella.md",
-    "manager_phone": "060808834"
+    }
   },
   "35": {
     "number": 35,
@@ -624,10 +522,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Colomeet Marina",
-    "manager_email": "manager.l35@linella.md",
-    "manager_phone": "060808835"
+    }
   },
   "36": {
     "number": 36,
@@ -642,10 +537,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": "Gheorghian Cristian",
-    "manager_email": "manager.l36@linella.md",
-    "manager_phone": "060808836"
+    }
   },
   "37": {
     "number": 37,
@@ -660,10 +552,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Cojocaru Anastasia",
-    "manager_email": "manager.l37@linella.md",
-    "manager_phone": "060808837"
+    }
   },
   "38": {
     "number": 38,
@@ -678,10 +567,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": "Rudenco Vitalie",
-    "manager_email": "manager.l38@linella.md",
-    "manager_phone": "060808838"
+    }
   },
   "39": {
     "number": 39,
@@ -696,10 +582,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "09:00–22:00"
-    },
-    "manager_name": "Zetu Gabriela",
-    "manager_email": "manager.l39@linella.md",
-    "manager_phone": "060808839"
+    }
   },
   "40": {
     "number": 40,
@@ -714,10 +597,7 @@
       "fri": "09:00–23:00",
       "sat": "09:00–23:00",
       "sun": "09:00–23:00"
-    },
-    "manager_name": "Irimca Daniela",
-    "manager_email": "manager.l40@linella.md",
-    "manager_phone": "060806212"
+    }
   },
   "41": {
     "number": 41,
@@ -732,10 +612,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": "Gusan Stanislav",
-    "manager_email": "manager.l41@linella.md",
-    "manager_phone": "060806210"
+    }
   },
   "42": {
     "number": 42,
@@ -750,10 +627,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": "Verstiuc Grigore",
-    "manager_email": "manager.l42@linella.md",
-    "manager_phone": "060806203"
+    }
   },
   "43": {
     "number": 43,
@@ -768,10 +642,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": "Ursu Carolina",
-    "manager_email": "manager.l43@linella.md",
-    "manager_phone": "060806217"
+    }
   },
   "44": {
     "number": 44,
@@ -786,10 +657,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": "Botezatu Iosif",
-    "manager_email": "manager.l44@linella.md",
-    "manager_phone": "060806201"
+    }
   },
   "45": {
     "number": 45,
@@ -804,10 +672,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": null,
-    "manager_email": null,
-    "manager_phone": null
+    }
   },
   "46": {
     "number": 46,
@@ -822,10 +687,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": "Gutu Irina",
-    "manager_email": "manager.l46@linella.md",
-    "manager_phone": "078988846"
+    }
   },
   "47": {
     "number": 47,
@@ -840,10 +702,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Grama Vera",
-    "manager_email": "manager.l47@linella.md",
-    "manager_phone": "078988847"
+    }
   },
   "48": {
     "number": 48,
@@ -858,10 +717,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": "Gutu Irina",
-    "manager_email": "manager.l48@linella.md",
-    "manager_phone": "078988848"
+    }
   },
   "49": {
     "number": 49,
@@ -876,10 +732,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Cazacu Elena",
-    "manager_email": "manager.l49@linella.md",
-    "manager_phone": "078988849"
+    }
   },
   "50": {
     "number": 50,
@@ -894,10 +747,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Griciuc Victoria",
-    "manager_email": "manager.l50@linella.md",
-    "manager_phone": "060806216"
+    }
   },
   "51": {
     "number": 51,
@@ -912,10 +762,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": "Sidorov Alexei",
-    "manager_email": "manager.l51@linella.md",
-    "manager_phone": "060806204"
+    }
   },
   "52": {
     "number": 52,
@@ -930,10 +777,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Mostovoi Maria",
-    "manager_email": "manager.l52@linella.md",
-    "manager_phone": "060806237"
+    }
   },
   "53": {
     "number": 53,
@@ -948,10 +792,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": "Gurdis Natalia",
-    "manager_email": "manager.l53@linella.md",
-    "manager_phone": "060806208"
+    }
   },
   "54": {
     "number": 54,
@@ -966,10 +807,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Vidmidi Ion",
-    "manager_email": "manager.l54@linella.md",
-    "manager_phone": "060806235"
+    }
   },
   "55": {
     "number": 55,
@@ -984,10 +822,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Coreni Irina",
-    "manager_email": "manager.l55@linella.md",
-    "manager_phone": "060806220"
+    }
   },
   "56": {
     "number": 56,
@@ -1002,10 +837,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Purcel Veronica",
-    "manager_email": "manager.l56@linella.md",
-    "manager_phone": "060806206"
+    }
   },
   "57": {
     "number": 57,
@@ -1020,10 +852,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "Închis"
-    },
-    "manager_name": null,
-    "manager_email": null,
-    "manager_phone": null
+    }
   },
   "58": {
     "number": 58,
@@ -1038,10 +867,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": "Ciumac Tatiana",
-    "manager_email": "manager.l58@linella.md",
-    "manager_phone": "060806211"
+    }
   },
   "59": {
     "number": 59,
@@ -1056,10 +882,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": null,
-    "manager_email": null,
-    "manager_phone": null
+    }
   },
   "60": {
     "number": 60,
@@ -1074,10 +897,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Florea Diana",
-    "manager_email": "manager.l60@linella.md",
-    "manager_phone": "060806236"
+    }
   },
   "61": {
     "number": 61,
@@ -1092,10 +912,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Parmacli Svetlana",
-    "manager_email": "manager.l61@linella.md",
-    "manager_phone": "078088861"
+    }
   },
   "62": {
     "number": 62,
@@ -1110,10 +927,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Bruma Alexandru",
-    "manager_email": "manager.l62@linella.md",
-    "manager_phone": "060806222"
+    }
   },
   "63": {
     "number": 63,
@@ -1128,10 +942,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Sitnicenco Anastasia",
-    "manager_email": "manager.l63@linella.md",
-    "manager_phone": "060806224"
+    }
   },
   "64": {
     "number": 64,
@@ -1146,10 +957,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Sirbu Cristina",
-    "manager_email": "manager.l64@linella.md",
-    "manager_phone": "060806242"
+    }
   },
   "65": {
     "number": 65,
@@ -1164,10 +972,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Albu Viorica",
-    "manager_email": "manager.l65@linella.md",
-    "manager_phone": "078088865"
+    }
   },
   "66": {
     "number": 66,
@@ -1182,10 +987,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Galetchi Mihail",
-    "manager_email": "manager.l66@linella.md",
-    "manager_phone": "060806238"
+    }
   },
   "67": {
     "number": 67,
@@ -1200,10 +1002,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Rusu Magdalena",
-    "manager_email": "manager.l67@linella.md",
-    "manager_phone": "078088867"
+    }
   },
   "68": {
     "number": 68,
@@ -1218,10 +1017,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": "Chiosa Mariana",
-    "manager_email": "manager.l68@linella.md",
-    "manager_phone": "078988868"
+    }
   },
   "69": {
     "number": 69,
@@ -1236,10 +1032,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Plotnicov Reghina",
-    "manager_email": "manager.l69@linella.md",
-    "manager_phone": "078988869"
+    }
   },
   "70": {
     "number": 70,
@@ -1254,10 +1047,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Buzu Lilia",
-    "manager_email": "manager.l70@linella.md",
-    "manager_phone": "078088870"
+    }
   },
   "71": {
     "number": 71,
@@ -1272,10 +1062,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "09:00–22:00"
-    },
-    "manager_name": "Boico Corina",
-    "manager_email": "manager.l71@linella.md",
-    "manager_phone": "060806218"
+    }
   },
   "72": {
     "number": 72,
@@ -1290,10 +1077,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Turcanu Lilia",
-    "manager_email": "manager.l72@linella.md",
-    "manager_phone": "078988872"
+    }
   },
   "73": {
     "number": 73,
@@ -1308,10 +1092,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Romandas Lidia",
-    "manager_email": "manager.l73@linella.md",
-    "manager_phone": "060806225"
+    }
   },
   "74": {
     "number": 74,
@@ -1326,10 +1107,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": "Petrova Galina",
-    "manager_email": "manager.l74@linella.md",
-    "manager_phone": "060806241"
+    }
   },
   "75": {
     "number": 75,
@@ -1344,10 +1122,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Sevciuc Vladimir",
-    "manager_email": "manager.l75@linella.md",
-    "manager_phone": "060806215"
+    }
   },
   "76": {
     "number": 76,
@@ -1362,10 +1137,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": "Cornea Alina",
-    "manager_email": "manager.l76@linella.md",
-    "manager_phone": "060806230"
+    }
   },
   "77": {
     "number": 77,
@@ -1380,10 +1152,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Turea Ecaterina",
-    "manager_email": "manager.l77@linella.md",
-    "manager_phone": "060806213"
+    }
   },
   "78": {
     "number": 78,
@@ -1398,10 +1167,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": "Cirlig Zinaida Ivan",
-    "manager_email": "manager.l78@linella.md",
-    "manager_phone": "078988878"
+    }
   },
   "79": {
     "number": 79,
@@ -1416,10 +1182,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Sasu Natalia",
-    "manager_email": "manager.l79@linella.md",
-    "manager_phone": "060806232"
+    }
   },
   "80": {
     "number": 80,
@@ -1434,10 +1197,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": "Ursu Irina",
-    "manager_email": "manager.l80@linella.md",
-    "manager_phone": "060806239"
+    }
   },
   "81": {
     "number": 81,
@@ -1452,10 +1212,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Aliev Chirill",
-    "manager_email": "manager.l81@linella.md",
-    "manager_phone": "060806226"
+    }
   },
   "82": {
     "number": 82,
@@ -1470,10 +1227,7 @@
       "fri": "nan",
       "sat": "nan",
       "sun": "nan"
-    },
-    "manager_name": null,
-    "manager_email": null,
-    "manager_phone": null
+    }
   },
   "83": {
     "number": 83,
@@ -1488,10 +1242,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Chuboteresku Kristina",
-    "manager_email": "manager.l83@linella.md",
-    "manager_phone": "060806209"
+    }
   },
   "84": {
     "number": 84,
@@ -1506,10 +1257,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Raiu Ecaterina",
-    "manager_email": "manager.l84@linella.md",
-    "manager_phone": "060806202"
+    }
   },
   "85": {
     "number": 85,
@@ -1524,10 +1272,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Trifan Natalia Ion",
-    "manager_email": "manager.l85@linella.md",
-    "manager_phone": "079898885"
+    }
   },
   "86": {
     "number": 86,
@@ -1542,10 +1287,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "natalia.trifan",
-    "manager_email": "manager.l86@linella.md",
-    "manager_phone": "078988886"
+    }
   },
   "87": {
     "number": 87,
@@ -1560,10 +1302,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": "Cebotari Lucia",
-    "manager_email": "manager.l87@linella.md",
-    "manager_phone": "078988887"
+    }
   },
   "88": {
     "number": 88,
@@ -1578,10 +1317,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Bardier Olga",
-    "manager_email": "manager.l88@linella.md",
-    "manager_phone": "078110888"
+    }
   },
   "89": {
     "number": 89,
@@ -1596,10 +1332,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Buruian Nicolae",
-    "manager_email": "manager.l89@linella.md",
-    "manager_phone": "078098889"
+    }
   },
   "90": {
     "number": 90,
@@ -1614,10 +1347,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": "Dobrea Marcela",
-    "manager_email": "manager.l90@linella.md",
-    "manager_phone": "078988890"
+    }
   },
   "91": {
     "number": 91,
@@ -1632,10 +1362,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Covileac Marina",
-    "manager_email": "manager.l91@linella.md",
-    "manager_phone": "078988891"
+    }
   },
   "92": {
     "number": 92,
@@ -1650,10 +1377,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Caraman Alisa",
-    "manager_email": "manager.l92@linella.md",
-    "manager_phone": "078988892"
+    }
   },
   "93": {
     "number": 93,
@@ -1668,10 +1392,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": "Valentinov Lucia",
-    "manager_email": "manager.l93@linella.md",
-    "manager_phone": "078988893"
+    }
   },
   "94": {
     "number": 94,
@@ -1686,10 +1407,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": "Nita Nadejda",
-    "manager_email": "manager.l94@linella.md",
-    "manager_phone": "078896094"
+    }
   },
   "95": {
     "number": 95,
@@ -1704,10 +1422,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Raducan Nina",
-    "manager_email": "manager.l95@linella.md",
-    "manager_phone": "078892095"
+    }
   },
   "96": {
     "number": 96,
@@ -1722,10 +1437,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Oxani Ecaterina",
-    "manager_email": "manager.l96@linella.md",
-    "manager_phone": "078896096"
+    }
   },
   "97": {
     "number": 97,
@@ -1740,10 +1452,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": "Ciubotaru Liliana",
-    "manager_email": "manager.l97@linella.md",
-    "manager_phone": "078896097"
+    }
   },
   "98": {
     "number": 98,
@@ -1758,10 +1467,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": "Braguta Oxana",
-    "manager_email": "manager.l98@linella.md",
-    "manager_phone": "078896098"
+    }
   },
   "99": {
     "number": 99,
@@ -1776,10 +1482,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Vartic Inga",
-    "manager_email": "manager.l99@linella.md",
-    "manager_phone": "078896099"
+    }
   },
   "100": {
     "number": 100,
@@ -1794,10 +1497,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": "Besliu Elena",
-    "manager_email": "manager.l100@linella.md",
-    "manager_phone": "078896100"
+    }
   },
   "101": {
     "number": 101,
@@ -1812,10 +1512,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Gutuleac Roman",
-    "manager_email": "manager.l101@linella.md",
-    "manager_phone": "078896101"
+    }
   },
   "102": {
     "number": 102,
@@ -1830,10 +1527,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Oleinic Veronica",
-    "manager_email": "manager.l102@linella.md",
-    "manager_phone": "078896102"
+    }
   },
   "103": {
     "number": 103,
@@ -1848,10 +1542,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Colesnic Iulia",
-    "manager_email": "manager.l103@linella.md",
-    "manager_phone": "078896103"
+    }
   },
   "104": {
     "number": 104,
@@ -1866,10 +1557,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": "Munteanu Valeriu",
-    "manager_email": "manager.l104@linella.md",
-    "manager_phone": "078896104"
+    }
   },
   "105": {
     "number": 105,
@@ -1884,10 +1572,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Pinzari Evghenia",
-    "manager_email": "manager.l105@linella.md",
-    "manager_phone": "078887105"
+    }
   },
   "106": {
     "number": 106,
@@ -1902,10 +1587,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Grecu Tatiana",
-    "manager_email": "manager.l106@linella.md",
-    "manager_phone": "078896106"
+    }
   },
   "107": {
     "number": 107,
@@ -1920,10 +1602,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": "Suhoborcenco Nina",
-    "manager_email": "manager.l107@linella.md",
-    "manager_phone": "078896107"
+    }
   },
   "108": {
     "number": 108,
@@ -1938,10 +1617,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Palade Efim",
-    "manager_email": "manager.l108@linella.md",
-    "manager_phone": "079090108"
+    }
   },
   "109": {
     "number": 109,
@@ -1956,10 +1632,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Iarusevscaia Victoria",
-    "manager_email": "manager.l109@linella.md",
-    "manager_phone": "078896109"
+    }
   },
   "110": {
     "number": 110,
@@ -1974,10 +1647,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Leonti Cristian Ion",
-    "manager_email": "manager.l110@linella.md",
-    "manager_phone": "078896110"
+    }
   },
   "111": {
     "number": 111,
@@ -1992,10 +1662,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Cernova  Aliona",
-    "manager_email": "manager.l111@linella.md",
-    "manager_phone": "078896111"
+    }
   },
   "112": {
     "number": 112,
@@ -2010,10 +1677,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": "Pozdirca Diana",
-    "manager_email": "manager.l112@linella.md",
-    "manager_phone": "078894112"
+    }
   },
   "113": {
     "number": 113,
@@ -2028,10 +1692,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Dolgu Adelina",
-    "manager_email": "manager.l113@linella.md",
-    "manager_phone": "079090113"
+    }
   },
   "114": {
     "number": 114,
@@ -2046,10 +1707,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": "Cuciuc Natalia",
-    "manager_email": "manager.l114@linella.md",
-    "manager_phone": "078894114"
+    }
   },
   "115": {
     "number": 115,
@@ -2064,10 +1722,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "Închis"
-    },
-    "manager_name": "Svercicov Natalia",
-    "manager_email": "manager.l115@linella.md",
-    "manager_phone": "078894115"
+    }
   },
   "116": {
     "number": 116,
@@ -2082,10 +1737,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Sirbu Igor",
-    "manager_email": "manager.l116@linella.md",
-    "manager_phone": "078895116"
+    }
   },
   "117": {
     "number": 117,
@@ -2100,10 +1752,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Marcenco Tatiana",
-    "manager_email": "manager.l117@linella.md",
-    "manager_phone": "078891117"
+    }
   },
   "118": {
     "number": 118,
@@ -2118,10 +1767,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": "Racu Liviu",
-    "manager_email": "manager.l118@linella.md",
-    "manager_phone": "078896118"
+    }
   },
   "119": {
     "number": 119,
@@ -2136,10 +1782,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Romanciuc Natalia",
-    "manager_email": "manager.l119@linella.md",
-    "manager_phone": "078886119"
+    }
   },
   "120": {
     "number": 120,
@@ -2154,10 +1797,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Fodor Georgeta",
-    "manager_email": "manager.l120@linella.md",
-    "manager_phone": "078350120"
+    }
   },
   "121": {
     "number": 121,
@@ -2172,10 +1812,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Chuboteresku Kristina",
-    "manager_email": "manager.l121@linella.md",
-    "manager_phone": "078123121"
+    }
   },
   "122": {
     "number": 122,
@@ -2190,10 +1827,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Dolinschii Irina",
-    "manager_email": "manager.l122@linella.md",
-    "manager_phone": "078350122"
+    }
   },
   "123": {
     "number": 123,
@@ -2208,10 +1842,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Chiulafli Arina",
-    "manager_email": "manager.l123@linella.md",
-    "manager_phone": "078840123"
+    }
   },
   "124": {
     "number": 124,
@@ -2226,10 +1857,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Cozonac Victoria",
-    "manager_email": "manager.l124@linella.md",
-    "manager_phone": "079010124"
+    }
   },
   "125": {
     "number": 125,
@@ -2244,10 +1872,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Caraman Alisa",
-    "manager_email": "manager.l125@linella.md",
-    "manager_phone": "078805125"
+    }
   },
   "126": {
     "number": 126,
@@ -2262,10 +1887,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Godoroja Maria",
-    "manager_email": "manager.l126@linella.md",
-    "manager_phone": "078805126"
+    }
   },
   "127": {
     "number": 127,
@@ -2280,10 +1902,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Andronic-Sclifos Irina",
-    "manager_email": "manager.l127@linella.md",
-    "manager_phone": "078350127"
+    }
   },
   "128": {
     "number": 128,
@@ -2298,10 +1917,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Jereghi Mihaela-Paola",
-    "manager_email": "manager.l128@linella.md",
-    "manager_phone": "078805128"
+    }
   },
   "129": {
     "number": 129,
@@ -2316,10 +1932,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": "Cebirciu Cristina",
-    "manager_email": "manager.l129@linella.md",
-    "manager_phone": "078805129"
+    }
   },
   "130": {
     "number": 130,
@@ -2334,10 +1947,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": "Burlac Eugenia",
-    "manager_email": "manager.l130@linella.md",
-    "manager_phone": "079034130"
+    }
   },
   "131": {
     "number": 131,
@@ -2352,10 +1962,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": "Carpatiuc Alina",
-    "manager_email": "manager.l131@linella.md",
-    "manager_phone": "079098131"
+    }
   },
   "132": {
     "number": 132,
@@ -2370,10 +1977,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": "Bogomolov Victoria",
-    "manager_email": "manager.l132@linella.md",
-    "manager_phone": "079670132"
+    }
   },
   "133": {
     "number": 133,
@@ -2388,10 +1992,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": "Cujba Mariana",
-    "manager_email": "manager.l133@linella.md",
-    "manager_phone": "079032133"
+    }
   },
   "134": {
     "number": 134,
@@ -2406,10 +2007,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Roman Mariana",
-    "manager_email": "manager.l134@linella.md",
-    "manager_phone": "079441134"
+    }
   },
   "135": {
     "number": 135,
@@ -2424,10 +2022,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": "Digori Svetlana",
-    "manager_email": "manager.l135@linella.md",
-    "manager_phone": "078810135"
+    }
   },
   "136": {
     "number": 136,
@@ -2442,10 +2037,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Luca Ion Dumitru",
-    "manager_email": "manager.l136@linella.md",
-    "manager_phone": "079605136"
+    }
   },
   "137": {
     "number": 137,
@@ -2460,10 +2052,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Muntean Cristina",
-    "manager_email": "manager.l137@linella.md",
-    "manager_phone": "079109137"
+    }
   },
   "138": {
     "number": 138,
@@ -2478,10 +2067,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Golobciuc Oleg",
-    "manager_email": "manager.l138@linella.md",
-    "manager_phone": "079850138"
+    }
   },
   "139": {
     "number": 139,
@@ -2496,10 +2082,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Ampava Andrei",
-    "manager_email": "manager.l139@linella.md",
-    "manager_phone": "078842139"
+    }
   },
   "140": {
     "number": 140,
@@ -2514,10 +2097,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Verdes Tatiana",
-    "manager_email": "manager.l140@linella.md",
-    "manager_phone": "079406140"
+    }
   },
   "141": {
     "number": 141,
@@ -2532,10 +2112,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Halipli Elena",
-    "manager_email": "manager.l141@linella.md",
-    "manager_phone": "079973141"
+    }
   },
   "142": {
     "number": 142,
@@ -2550,10 +2127,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Apreutesii Iulia",
-    "manager_email": "manager.l142@linella.md",
-    "manager_phone": "078897142"
+    }
   },
   "143": {
     "number": 143,
@@ -2568,10 +2142,7 @@
       "fri": "10:00–22:00",
       "sat": "10:00–22:00",
       "sun": "10:00–22:00"
-    },
-    "manager_name": "Vidmidi Ion",
-    "manager_email": "manager.l143@linella.md",
-    "manager_phone": "079975143"
+    }
   },
   "144": {
     "number": 144,
@@ -2586,10 +2157,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": "Vamisevschi Arina",
-    "manager_email": "manager.l144@linella.md",
-    "manager_phone": "079939144"
+    }
   },
   "145": {
     "number": 145,
@@ -2604,10 +2172,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Iamandi Diana",
-    "manager_email": "manager.l145@linella.md",
-    "manager_phone": "079964145"
+    }
   },
   "146": {
     "number": 146,
@@ -2622,10 +2187,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Petrasco Victoria",
-    "manager_email": "manager.l146@linella.md",
-    "manager_phone": "079964146"
+    }
   },
   "147": {
     "number": 147,
@@ -2640,10 +2202,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Covic Veronica",
-    "manager_email": "manager.l147@linella.md",
-    "manager_phone": "079984147"
+    }
   },
   "148": {
     "number": 148,
@@ -2658,10 +2217,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Ulinici Eugenia",
-    "manager_email": "manager.l148@linella.md",
-    "manager_phone": "078771148"
+    }
   },
   "149": {
     "number": 149,
@@ -2676,10 +2232,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Dodon Elena",
-    "manager_email": "manager.l149@linella.md",
-    "manager_phone": "078771149"
+    }
   },
   "150": {
     "number": 150,
@@ -2694,10 +2247,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Coada Silvia",
-    "manager_email": "manager.l150@linella.md",
-    "manager_phone": "078771150"
+    }
   },
   "151": {
     "number": 151,
@@ -2712,10 +2262,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": "Caraja Iulia",
-    "manager_email": "manager.l151@linella.md",
-    "manager_phone": "079980151"
+    }
   },
   "152": {
     "number": 152,
@@ -2730,10 +2277,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Iftemi Veaceslav",
-    "manager_email": "manager.l152@linella.md",
-    "manager_phone": "078771152"
+    }
   },
   "153": {
     "number": 153,
@@ -2748,10 +2292,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Boboc Ana",
-    "manager_email": "manager.l153@linella.md",
-    "manager_phone": "078771153"
+    }
   },
   "154": {
     "number": 154,
@@ -2766,10 +2307,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Bordian Oxana",
-    "manager_email": "manager.l154@linella.md",
-    "manager_phone": "078772154"
+    }
   },
   "155": {
     "number": 155,
@@ -2784,10 +2322,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Nicolaeva Maria",
-    "manager_email": "manager.l155@linella.md",
-    "manager_phone": "078772155"
+    }
   },
   "156": {
     "number": 156,
@@ -2802,10 +2337,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Sirbu Alexandr",
-    "manager_email": "manager.l156@linella.md",
-    "manager_phone": "079774156"
+    }
   },
   "157": {
     "number": 157,
@@ -2820,10 +2352,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Balaban Raisa",
-    "manager_email": "manager.l157@linella.md",
-    "manager_phone": "079774157"
+    }
   },
   "158": {
     "number": 158,
@@ -2838,10 +2367,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Cojocaru Victoria",
-    "manager_email": "manager.l158@linella.md",
-    "manager_phone": "079773158"
+    }
   },
   "159": {
     "number": 159,
@@ -2856,10 +2382,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Trandasir Andrei",
-    "manager_email": "manager.l159@linella.md",
-    "manager_phone": "078771159"
+    }
   },
   "160": {
     "number": 160,
@@ -2874,10 +2397,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Busuioc Vasile",
-    "manager_email": "manager.l160@linella.md",
-    "manager_phone": "078771160"
+    }
   },
   "161": {
     "number": 161,
@@ -2892,10 +2412,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Ciubotaru Raisa",
-    "manager_email": "manager.l161@linella.md",
-    "manager_phone": "078171161"
+    }
   },
   "162": {
     "number": 162,
@@ -2910,10 +2427,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Spataru Vasile",
-    "manager_email": "manager.l162@linella.md",
-    "manager_phone": "079774162"
+    }
   },
   "163": {
     "number": 163,
@@ -2928,10 +2442,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Avram Mihail",
-    "manager_email": "manager.l163@linella.md",
-    "manager_phone": "079774163"
+    }
   },
   "164": {
     "number": 164,
@@ -2946,10 +2457,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Constantiniuc Stefan",
-    "manager_email": "manager.l164@linella.md",
-    "manager_phone": "078771164"
+    }
   },
   "165": {
     "number": 165,
@@ -2964,10 +2472,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Dascaliuc Irina",
-    "manager_email": "manager.l165@linella.md",
-    "manager_phone": "078771165"
+    }
   },
   "166": {
     "number": 166,
@@ -2982,10 +2487,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Spinu Ludmila",
-    "manager_email": "manager.l166@linella.md",
-    "manager_phone": "079774166"
+    }
   },
   "167": {
     "number": 167,
@@ -3000,10 +2502,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Savin Valentin",
-    "manager_email": "manager.l167@linella.md",
-    "manager_phone": "079774167"
+    }
   },
   "168": {
     "number": 168,
@@ -3018,10 +2517,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Chiciuc Svetlana",
-    "manager_email": "manager.l168@linella.md",
-    "manager_phone": "076001168"
+    }
   },
   "169": {
     "number": 169,
@@ -3036,10 +2532,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Cojocari Igor",
-    "manager_email": "manager.l169@linella.md",
-    "manager_phone": "078771169"
+    }
   },
   "170": {
     "number": 170,
@@ -3054,10 +2547,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Utica Dorin",
-    "manager_email": "manager.l170@linella.md",
-    "manager_phone": "076772170"
+    }
   },
   "171": {
     "number": 171,
@@ -3072,10 +2562,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Demian Liudmila",
-    "manager_email": "manager.l171@linella.md",
-    "manager_phone": "076772171"
+    }
   },
   "172": {
     "number": 172,
@@ -3090,10 +2577,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": "Secrieru Alina",
-    "manager_email": "manager.l172@linella.md",
-    "manager_phone": "076771172"
+    }
   },
   "173": {
     "number": 173,
@@ -3108,10 +2592,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "09:00–22:00"
-    },
-    "manager_name": "Dragutan Ludmila",
-    "manager_email": "manager.l173@linella.md",
-    "manager_phone": "076771173"
+    }
   },
   "174": {
     "number": 174,
@@ -3126,10 +2607,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": null,
-    "manager_email": "manager.l174@linella.md",
-    "manager_phone": "076771174"
+    }
   },
   "175": {
     "number": 175,
@@ -3144,10 +2622,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Calancea Natalia",
-    "manager_email": "manager.l175@linella.md",
-    "manager_phone": "076771175"
+    }
   },
   "176": {
     "number": 176,
@@ -3162,10 +2637,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Costetchi Tatiana",
-    "manager_email": "manager.l176@linella.md",
-    "manager_phone": "076004176"
+    }
   },
   "177": {
     "number": 177,
@@ -3180,10 +2652,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Cepil Ana",
-    "manager_email": "manager.l177@linella.md",
-    "manager_phone": "076005177"
+    }
   },
   "178": {
     "number": 178,
@@ -3198,10 +2667,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Oleinic Veronica",
-    "manager_email": "manager.l178@linella.md",
-    "manager_phone": "076771178"
+    }
   },
   "179": {
     "number": 179,
@@ -3216,10 +2682,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Cojocaru Ion",
-    "manager_email": "manager.l179@linella.md",
-    "manager_phone": "076771179"
+    }
   },
   "180": {
     "number": 180,
@@ -3234,10 +2697,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Chicimaniuc Ina",
-    "manager_email": "manager.l180@linella.md",
-    "manager_phone": "076771180"
+    }
   },
   "181": {
     "number": 181,
@@ -3252,10 +2712,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Dudnic Tatiana",
-    "manager_email": "manager.l181@linella.md",
-    "manager_phone": "079321181"
+    }
   },
   "182": {
     "number": 182,
@@ -3270,10 +2727,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Cuceinic Serghei",
-    "manager_email": "manager.l182@linella.md",
-    "manager_phone": "076771182"
+    }
   },
   "183": {
     "number": 183,
@@ -3288,10 +2742,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Nederita Marionela",
-    "manager_email": "manager.l183@linella.md",
-    "manager_phone": "076771183"
+    }
   },
   "184": {
     "number": 184,
@@ -3306,10 +2757,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Covali Vasile",
-    "manager_email": "manager.l184@linella.md",
-    "manager_phone": "076771184"
+    }
   },
   "185": {
     "number": 185,
@@ -3324,10 +2772,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Ciolac Sabina",
-    "manager_email": "manager.l185@linella.md",
-    "manager_phone": "076771185"
+    }
   },
   "186": {
     "number": 186,
@@ -3342,10 +2787,7 @@
       "fri": "10:00–22:00",
       "sat": "10:00–22:00",
       "sun": "10:00–22:00"
-    },
-    "manager_name": "Burlacu Cristina",
-    "manager_email": "manager.l186@linella.md",
-    "manager_phone": "079328186"
+    }
   },
   "187": {
     "number": 187,
@@ -3360,10 +2802,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Lunca Andrei",
-    "manager_email": "manager.l187@linella.md",
-    "manager_phone": "079328187"
+    }
   },
   "188": {
     "number": 188,
@@ -3378,10 +2817,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": "Racila Silvia",
-    "manager_email": "manager.l188@linella.md",
-    "manager_phone": "079328188"
+    }
   },
   "189": {
     "number": 189,
@@ -3396,10 +2832,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Zanoga Cristian",
-    "manager_email": "manager.l189@linella.md",
-    "manager_phone": "079328189"
+    }
   },
   "190": {
     "number": 190,
@@ -3414,10 +2847,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Macovei Corina",
-    "manager_email": "manager.l190@linella.md",
-    "manager_phone": "079328190"
+    }
   },
   "191": {
     "number": 191,
@@ -3432,10 +2862,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Androniuc Tatiana",
-    "manager_email": "manager.l191@linella.md",
-    "manager_phone": "078344191"
+    }
   },
   "192": {
     "number": 192,
@@ -3450,10 +2877,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Tapu Zinaida",
-    "manager_email": "manager.l192@linella.md",
-    "manager_phone": "078344192"
+    }
   },
   "193": {
     "number": 193,
@@ -3468,10 +2892,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Postovan Adelina",
-    "manager_email": "manager.l193@linella.md",
-    "manager_phone": "078344193"
+    }
   },
   "194": {
     "number": 194,
@@ -3486,10 +2907,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Rusu Iulia",
-    "manager_email": "manager.l194@linella.md",
-    "manager_phone": "078344194"
+    }
   },
   "195": {
     "number": 195,
@@ -3504,10 +2922,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": null,
-    "manager_email": "manager.l195@linella.md",
-    "manager_phone": null
+    }
   },
   "196": {
     "number": 196,
@@ -3522,10 +2937,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Lazari Ana",
-    "manager_email": "manager.l196@linella.md",
-    "manager_phone": "078344196"
+    }
   },
   "197": {
     "number": 197,
@@ -3540,10 +2952,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Braila Marina",
-    "manager_email": "manager.l197@linella.md",
-    "manager_phone": "079344197"
+    }
   },
   "198": {
     "number": 198,
@@ -3558,10 +2967,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": "Cirlig Zinaida Ivan",
-    "manager_email": "manager.l198@linella.md",
-    "manager_phone": "078344198"
+    }
   },
   "199": {
     "number": 199,
@@ -3576,9 +2982,6 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": null,
-    "manager_email": "manager.l199@linella.md",
-    "manager_phone": null
+    }
   }
 }

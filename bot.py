@@ -132,6 +132,35 @@ def format_hours(hours: Dict[str, str]) -> str:
     names = ["Luni","Marți","Miercuri","Joi","Vineri","Sâmbătă","Duminică"]
     return "\n".join(f"{n}: {hours.get(k,'') or '—'}" for k,n in zip(order, names))
 
+# ── Manager info ─────────────────────────────────────────
+def get_manager_info(item: Dict[str, Any]) -> Tuple[str, str]:
+    """
+    Returnează (manager_name, manager_phone) din obiectul JSON.
+    Afișăm exact cum e în JSON; pentru butonul tel: curățăm separat.
+    """
+    name = (
+        item.get("manager_name")
+        or item.get("manager")
+        or item.get("manager_fullname")
+        or ""
+    )
+    phone = (
+        item.get("manager_phone")
+        or item.get("manager_contact")
+        or item.get("phone_manager")
+        or ""
+    )
+    name = name.strip() or "no info"
+    phone = phone.strip() or "no info"
+    return name, phone
+
+def tel_uri(phone_text: str) -> Optional[str]:
+    """ Transformă într-un tel: valid (păstrăm doar cifrele și +). """
+    if not phone_text or phone_text.lower() == "no info":
+        return None
+    cleaned = re.sub(r"[^\d+]", "", phone_text)
+    return f"tel:{cleaned}" if cleaned else None
+
 # parsare brand + număr
 def normalize_brand(s: str) -> Optional[str]:
     s = s.lower().strip()
@@ -283,15 +312,17 @@ def page_kb(brand_code: str, page: int) -> InlineKeyboardMarkup:
     kb.row(InlineKeyboardButton(text="🏠 Revino la meniu", callback_data="home"))
     return kb.as_markup()
 
-def links_kb_single(lat: float, lon: float) -> InlineKeyboardMarkup:
-    return InlineKeyboardMarkup(inline_keyboard=[[
+def links_kb_single(lat: float, lon: float, call_tel: Optional[str] = None) -> InlineKeyboardMarkup:
+    rows = [[
         InlineKeyboardButton(text="🗺️ Google Maps", url=f"https://www.google.com/maps?q={lat:.6f},{lon:.6f}")
     ],[
         InlineKeyboardButton(text="🚗 Waze",        url=waze_url(lat, lon)),
         InlineKeyboardButton(text="🧭 Yandex Maps", url=yandex_url(lat, lon)),
-    ],[
-        InlineKeyboardButton(text="🏠 Revino la meniu", callback_data="home")
-    ]])
+    ]]
+    if call_tel:
+        rows.append([InlineKeyboardButton(text="📞 Apelează manager", url=call_tel)])
+    rows.append([InlineKeyboardButton(text="🏠 Revino la meniu", callback_data="home")])
+    return InlineKeyboardMarkup(inline_keyboard=rows)
 
 def links_kb_route(origin: Optional[Tuple[float,float]],
                    ordered: List[Tuple[float,float]]) -> InlineKeyboardMarkup:
@@ -335,6 +366,10 @@ async def show_item(message: Message, brand_code: str, n: int):
         await message.answer(f"Nu am găsit {name} {n} în baza de date.", reply_markup=main_kb())
         return
 
+    # Manager info
+    manager_name, manager_phone = get_manager_info(item)
+    tel_link = tel_uri(manager_phone)
+
     address = item.get("address", "—")
     lat = float(item.get("lat") or 0)
     lon = float(item.get("lon") or 0)
@@ -354,11 +389,13 @@ async def show_item(message: Message, brand_code: str, n: int):
         f"📍 {address}\n"
         f"📌 Coordonate: {lat:.6f}, {lon:.6f}\n"
         f"{dist_line}\n\n"
+        f"👤 Manager: {manager_name}\n"
+        f"📞 Telefon manager: {manager_phone}\n\n"
         f"{opened}\n"
         f"🕒 Program (azi: {today_txt or '—'})\n\n"
         f"{format_hours(hours)}"
     )
-    await message.answer(text, reply_markup=links_kb_single(lat, lon))
+    await message.answer(text, reply_markup=links_kb_single(lat, lon, call_tel=tel_link))
     if lat and lon:
         await message.answer_location(latitude=lat, longitude=lon, reply_markup=main_kb())
 
@@ -372,9 +409,6 @@ async def start(message: Message):
         reply_markup=main_kb()
     )
 
-# (Eliminat handler-ul vechi pentru „🏠 Acasă” din meniul principal)
-
-# Callback „home” (din inline) → doar readuce tastatura
 @router.callback_query(F.data == "home")
 async def cb_home(cb: CallbackQuery):
     await cb.answer()

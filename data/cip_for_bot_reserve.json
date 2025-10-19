@@ -12,10 +12,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Mariana.Vlas",
-    "manager_email": "manager.cip1@moldretail.com",
-    "manager_phone": "060863954"
+    }
   },
   "2": {
     "number": 2,
@@ -30,10 +27,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Evdochia.Derebenscaia",
-    "manager_email": "manager.cip2@moldretail.com",
-    "manager_phone": "060886701"
+    }
   },
   "3": {
     "number": 3,
@@ -48,10 +42,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Rodica.Iazlovitchi",
-    "manager_email": "manager.cip3@moldretail.com",
-    "manager_phone": "060961610"
+    }
   },
   "4": {
     "number": 4,
@@ -66,10 +57,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Natalia.Rusu",
-    "manager_email": "manager.cip4@moldretail.com",
-    "manager_phone": "061023035"
+    }
   },
   "5": {
     "number": 5,
@@ -84,10 +72,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Ana.Morisco",
-    "manager_email": "manager.cip5@moldretail.com",
-    "manager_phone": "061063355"
+    }
   },
   "6": {
     "number": 6,
@@ -102,10 +87,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": "Ana.Cornescu",
-    "manager_email": "manager.cip6@moldretail.com",
-    "manager_phone": "062100210"
+    }
   },
   "7": {
     "number": 7,
@@ -120,10 +102,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Iulia.Marinov",
-    "manager_email": "manager.cip7@moldretail.com",
-    "manager_phone": "068074765"
+    }
   },
   "8": {
     "number": 8,
@@ -138,10 +117,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Anastasia.Ermacova",
-    "manager_email": "manager.cip8@moldretail.com",
-    "manager_phone": "068151374"
+    }
   },
   "9": {
     "number": 9,
@@ -156,10 +132,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Svetlana.Chicu",
-    "manager_email": "manager.cip9@moldretail.com",
-    "manager_phone": "068262827"
+    }
   },
   "10": {
     "number": 10,
@@ -174,10 +147,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Ina.Gargaun",
-    "manager_email": "manager.cip10@moldretail.com",
-    "manager_phone": "068334398"
+    }
   },
   "11": {
     "number": 11,
@@ -192,10 +162,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Tatiana.Sanchez Hernandez",
-    "manager_email": "manager.cip11@moldretail.com",
-    "manager_phone": "079036986"
+    }
   },
   "12": {
     "number": 12,
@@ -210,10 +177,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Daniela.Bumbu",
-    "manager_email": "manager.cip12@moldretail.com",
-    "manager_phone": "079930143"
+    }
   },
   "13": {
     "number": 13,
@@ -228,10 +192,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Veronica.Turcanu",
-    "manager_email": "manager.cip13@moldretail.com",
-    "manager_phone": "079318894"
+    }
   },
   "14": {
     "number": 14,
@@ -246,10 +207,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Iuliana.Croitoru",
-    "manager_email": "manager.cip14@moldretail.com",
-    "manager_phone": "079039261"
+    }
   },
   "15": {
     "number": 15,
@@ -264,10 +222,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Denis.Drosu",
-    "manager_email": "manager.cip15@moldretail.com",
-    "manager_phone": "079930320"
+    }
   },
   "16": {
     "number": 16,
@@ -282,10 +237,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Alina.Tverdohleb",
-    "manager_email": "manager.cip16@moldretail.com",
-    "manager_phone": "079930372"
+    }
   },
   "17": {
     "number": 17,
@@ -300,10 +252,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": "Daniela.Teisanu",
-    "manager_email": "manager.cip17@moldretail.com",
-    "manager_phone": "079321432"
+    }
   },
   "18": {
     "number": 18,
@@ -318,10 +267,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Cristina.Andries",
-    "manager_email": "manager.cip18@moldretail.com",
-    "manager_phone": "079323911"
+    }
   },
   "19": {
     "number": 19,
@@ -336,10 +282,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Nicolae.Bargan",
-    "manager_email": "manager.cip19@moldretail.com",
-    "manager_phone": "079340413"
+    }
   },
   "20": {
     "number": 20,
@@ -354,10 +297,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": "Valeria.Baciu",
-    "manager_email": "manager.cip20@moldretail.com",
-    "manager_phone": "079340988"
+    }
   },
   "21": {
     "number": 21,
@@ -372,10 +312,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Elena.Malcoci",
-    "manager_email": "manager.cip21@moldretail.com",
-    "manager_phone": "079341136"
+    }
   },
   "22": {
     "number": 22,
@@ -390,10 +327,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Eugenia.Bataevas",
-    "manager_email": "manager.cip22@moldretail.com",
-    "manager_phone": "079341668"
+    }
   },
   "23": {
     "number": 23,
@@ -408,10 +342,7 @@
       "fri": "09:00–23:00",
       "sat": "09:00–23:00",
       "sun": "09:00–23:00"
-    },
-    "manager_name": "Svetlana.Ciuperca",
-    "manager_email": "manager.cip23@moldretail.com",
-    "manager_phone": "079341709"
+    }
   },
   "24": {
     "number": 24,
@@ -426,10 +357,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": "Valentina.Camilciu",
-    "manager_email": "manager.cip24@moldretail.com",
-    "manager_phone": "079341909"
+    }
   },
   "25": {
     "number": 25,
@@ -444,10 +372,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": "Cristina.Vidmidi",
-    "manager_email": "manager.cip25@moldretail.com",
-    "manager_phone": "079342036"
+    }
   },
   "26": {
     "number": 26,
@@ -462,10 +387,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": "Stela.Ungureanu",
-    "manager_email": "manager.cip26@moldretail.com",
-    "manager_phone": "079343510"
+    }
   },
   "27": {
     "number": 27,
@@ -480,10 +402,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Maria.Levinte",
-    "manager_email": "manager.cip27@moldretail.com",
-    "manager_phone": "079346292"
+    }
   },
   "28": {
     "number": 28,
@@ -498,10 +417,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Svetlana.Jelez",
-    "manager_email": "manager.cip28@moldretail.com",
-    "manager_phone": "079346454"
+    }
   },
   "29": {
     "number": 29,
@@ -516,10 +432,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Elena.Neagu",
-    "manager_email": "manager.cip29@moldretail.com",
-    "manager_phone": "079347691"
+    }
   },
   "30": {
     "number": 30,
@@ -534,10 +447,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Alexandru.Ghencea",
-    "manager_email": "manager.cip30@moldretail.com",
-    "manager_phone": "079349514"
+    }
   },
   "31": {
     "number": 31,
@@ -552,10 +462,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Natalia.Zavricico",
-    "manager_email": "manager.cip31@moldretail.com",
-    "manager_phone": "079431280"
+    }
   },
   "32": {
     "number": 32,
@@ -570,10 +477,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": "Tatiana.Poiata",
-    "manager_email": "manager.cip32@moldretail.com",
-    "manager_phone": "079431296"
+    }
   },
   "33": {
     "number": 33,
@@ -588,10 +492,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": "Erhan.Aurelia",
-    "manager_email": "manager.cip33@moldretail.com",
-    "manager_phone": "079317681"
+    }
   },
   "34": {
     "number": 34,
@@ -606,10 +507,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Natalia.Varfolomeev",
-    "manager_email": "manager.cip34@moldretail.com",
-    "manager_phone": "079431270"
+    }
   },
   "35": {
     "number": 35,
@@ -624,10 +522,7 @@
       "fri": "09:00–23:00",
       "sat": "09:00–23:00",
       "sun": "09:00–23:00"
-    },
-    "manager_name": "Veronica.Budarin",
-    "manager_email": "manager.cip35@moldretail.com",
-    "manager_phone": "079431264"
+    }
   },
   "36": {
     "number": 36,
@@ -642,10 +537,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Silvia.Popov",
-    "manager_email": "manager.cip36@moldretail.com",
-    "manager_phone": "079431245"
+    }
   },
   "37": {
     "number": 37,
@@ -660,10 +552,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Elena.Rogozari",
-    "manager_email": "manager.cip37@moldretail.com",
-    "manager_phone": "079431327"
+    }
   },
   "38": {
     "number": 38,
@@ -678,10 +567,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Tatiana.Busuioc",
-    "manager_email": "manager.cip38@moldretail.com",
-    "manager_phone": "079431326"
+    }
   },
   "39": {
     "number": 39,
@@ -696,10 +582,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Angela.Radu",
-    "manager_email": "manager.cip39@moldretail.com",
-    "manager_phone": "079431325"
+    }
   },
   "40": {
     "number": 40,
@@ -714,10 +597,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Dana.Bragari",
-    "manager_email": "manager.cip40@moldretail.com",
-    "manager_phone": "079431324"
+    }
   },
   "41": {
     "number": 41,
@@ -732,10 +612,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Nicolae.Popovici",
-    "manager_email": "manager.cip41@moldretail.com",
-    "manager_phone": "079430923"
+    }
   },
   "42": {
     "number": 42,
@@ -750,10 +627,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": "Alina.Ibriciuc",
-    "manager_email": "manager.cip42@moldretail.com",
-    "manager_phone": "079430973"
+    }
   },
   "43": {
     "number": 43,
@@ -768,10 +642,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Olesea.Ceban",
-    "manager_email": "manager.cip43@moldretail.com",
-    "manager_phone": "079430563"
+    }
   },
   "44": {
     "number": 44,
@@ -786,10 +657,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Fiodor.Trandafil",
-    "manager_email": "manager.cip44@moldretail.com",
-    "manager_phone": "079430845"
+    }
   },
   "45": {
     "number": 45,
@@ -804,10 +672,7 @@
       "fri": "",
       "sat": "",
       "sun": ""
-    },
-    "manager_name": "Maria.Porcescu",
-    "manager_email": "manager.cip45@moldretail.com",
-    "manager_phone": "079433028"
+    }
   },
   "46": {
     "number": 46,
@@ -822,10 +687,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": "Veronica.Bratu",
-    "manager_email": "manager.cip46@moldretail.com",
-    "manager_phone": "079433867"
+    }
   },
   "47": {
     "number": 47,
@@ -840,10 +702,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Aliona.Ghenea",
-    "manager_email": "manager.cip47@moldretail.com",
-    "manager_phone": "079433875"
+    }
   },
   "48": {
     "number": 48,
@@ -858,10 +717,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Mariana.Kara",
-    "manager_email": "manager.cip48@moldretail.com",
-    "manager_phone": "079433880"
+    }
   },
   "49": {
     "number": 49,
@@ -876,10 +732,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Marina.Spoialo",
-    "manager_email": "manager.cip49@moldretail.com",
-    "manager_phone": "079433914"
+    }
   },
   "50": {
     "number": 50,
@@ -894,10 +747,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Igor Bardier",
-    "manager_email": "manager.cip50@moldretail.com",
-    "manager_phone": "078344295"
+    }
   },
   "51": {
     "number": 51,
@@ -912,10 +762,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": "Elena.Ababii",
-    "manager_email": "manager.cip51@moldretail.com",
-    "manager_phone": "078344155"
+    }
   },
   "52": {
     "number": 52,
@@ -930,10 +777,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": "Doina.Nacu",
-    "manager_email": "manager.cip52@moldretail.com",
-    "manager_phone": "078344594"
+    }
   },
   "53": {
     "number": 53,
@@ -948,10 +792,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Ana.Ciuperca",
-    "manager_email": "manager.cip53@moldretail.com",
-    "manager_phone": "078344091"
+    }
   },
   "54": {
     "number": 54,
@@ -966,10 +807,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Eduard.Ciuperca",
-    "manager_email": "manager.cip54@moldretail.com",
-    "manager_phone": "078344398"
+    }
   },
   "55": {
     "number": 55,
@@ -984,10 +822,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Cristina.Arteni",
-    "manager_email": "manager.cip55@moldretail.com",
-    "manager_phone": "078344067"
+    }
   },
   "56": {
     "number": 56,
@@ -1002,10 +837,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–23:00"
-    },
-    "manager_name": "no info",
-    "manager_email": "manager.cip56@moldretail.com",
-    "manager_phone": "no info"
+    }
   },
   "57": {
     "number": 57,
@@ -1020,10 +852,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "no info",
-    "manager_email": "manager.cip57@moldretail.com",
-    "manager_phone": "no info"
+    }
   },
   "58": {
     "number": 58,
@@ -1038,10 +867,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Diana.Leahu",
-    "manager_email": "manager.cip58@moldretail.com",
-    "manager_phone": "078344696"
+    }
   },
   "59": {
     "number": 59,
@@ -1056,10 +882,7 @@
       "fri": "08:00–22:00",
       "sat": "08:00–22:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Elena.Rotari",
-    "manager_email": "manager.cip59@moldretail.com",
-    "manager_phone": "078344082"
+    }
   },
   "60": {
     "number": 60,
@@ -1074,10 +897,7 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "Maria.Tutuianu",
-    "manager_email": "manager.cip60@moldretail.com",
-    "manager_phone": "078344836"
+    }
   },
   "61": {
     "number": 61,
@@ -1092,9 +912,6 @@
       "fri": "08:00–23:00",
       "sat": "08:00–23:00",
       "sun": "08:00–22:00"
-    },
-    "manager_name": "O l g a . C h i u r p e a",
-    "manager_email": "manager.cip61@moldretail.com",
-    "manager_phone": "no info"
+    }
   }
 }
