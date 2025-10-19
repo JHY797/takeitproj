@@ -132,35 +132,6 @@ def format_hours(hours: Dict[str, str]) -> str:
     names = ["Luni","Marți","Miercuri","Joi","Vineri","Sâmbătă","Duminică"]
     return "\n".join(f"{n}: {hours.get(k,'') or '—'}" for k,n in zip(order, names))
 
-# ── Manager info ─────────────────────────────────────────
-def get_manager_info(item: Dict[str, Any]) -> Tuple[str, str]:
-    """
-    Returnează (manager_name, manager_phone) din obiectul JSON.
-    Afișăm exact cum e în JSON; pentru butonul tel: curățăm separat.
-    """
-    name = (
-        item.get("manager_name")
-        or item.get("manager")
-        or item.get("manager_fullname")
-        or ""
-    )
-    phone = (
-        item.get("manager_phone")
-        or item.get("manager_contact")
-        or item.get("phone_manager")
-        or ""
-    )
-    name = name.strip() or "no info"
-    phone = phone.strip() or "no info"
-    return name, phone
-
-def tel_uri(phone_text: str) -> Optional[str]:
-    """ Transformă într-un tel: valid (păstrăm doar cifrele și +). """
-    if not phone_text or phone_text.lower() == "no info":
-        return None
-    cleaned = re.sub(r"[^\d+]", "", phone_text)
-    return f"tel:{cleaned}" if cleaned else None
-
 # parsare brand + număr
 def normalize_brand(s: str) -> Optional[str]:
     s = s.lower().strip()
@@ -270,6 +241,26 @@ async def directions_optimize(origin: Tuple[float,float],
     return out, int(km/35*3600)
 
 # ─────────────────────────────────────────────────────────
+# Telefon – normalizare & E.164
+# ─────────────────────────────────────────────────────────
+_NON_DIGITS = re.compile(r"\D+")
+
+def phone_digits(s: Optional[str]) -> str:
+    """Elimină tot ce nu e cifră. '0-60-80-88-20' -> '060808820'."""
+    return _NON_DIGITS.sub("", s or "")
+
+def phone_e164_md(s: Optional[str]) -> str:
+    """Returnează +373XXXXXXXX; acceptă 060..., 6xx/7xx..., sau 373..."""
+    d = phone_digits(s)
+    if not d:
+        return ""
+    if d.startswith("373"):
+        return f"+{d}"
+    if d.startswith("0"):
+        return f"+373{d[1:]}"
+    return f"+373{d}"
+
+# ─────────────────────────────────────────────────────────
 # UI
 # ─────────────────────────────────────────────────────────
 def main_kb() -> ReplyKeyboardMarkup:
@@ -312,15 +303,15 @@ def page_kb(brand_code: str, page: int) -> InlineKeyboardMarkup:
     kb.row(InlineKeyboardButton(text="🏠 Revino la meniu", callback_data="home"))
     return kb.as_markup()
 
-def links_kb_single(lat: float, lon: float, call_tel: Optional[str] = None) -> InlineKeyboardMarkup:
-    rows = [[
-        InlineKeyboardButton(text="🗺️ Google Maps", url=f"https://www.google.com/maps?q={lat:.6f},{lon:.6f}")
-    ],[
-        InlineKeyboardButton(text="🚗 Waze",        url=waze_url(lat, lon)),
-        InlineKeyboardButton(text="🧭 Yandex Maps", url=yandex_url(lat, lon)),
-    ]]
-    if call_tel:
-        rows.append([InlineKeyboardButton(text="📞 Apelează manager", url=call_tel)])
+def links_kb_single(lat: float, lon: float, call_cb: Optional[str] = None) -> InlineKeyboardMarkup:
+    rows = [
+        [InlineKeyboardButton(text="🗺️ Google Maps",
+                              url=f"https://www.google.com/maps?q={lat:.6f},{lon:.6f}")],
+        [InlineKeyboardButton(text="🚗 Waze",        url=waze_url(lat, lon)),
+         InlineKeyboardButton(text="🧭 Yandex Maps", url=yandex_url(lat, lon))]
+    ]
+    if call_cb:
+        rows.append([InlineKeyboardButton(text="📞 Apelează manager", callback_data=call_cb)])
     rows.append([InlineKeyboardButton(text="🏠 Revino la meniu", callback_data="home")])
     return InlineKeyboardMarkup(inline_keyboard=rows)
 
@@ -366,10 +357,6 @@ async def show_item(message: Message, brand_code: str, n: int):
         await message.answer(f"Nu am găsit {name} {n} în baza de date.", reply_markup=main_kb())
         return
 
-    # Manager info
-    manager_name, manager_phone = get_manager_info(item)
-    tel_link = tel_uri(manager_phone)
-
     address = item.get("address", "—")
     lat = float(item.get("lat") or 0)
     lon = float(item.get("lon") or 0)
@@ -384,18 +371,31 @@ async def show_item(message: Message, brand_code: str, n: int):
         km = haversine_km(u_lat, u_lon, lat, lon)
         dist_line = f"📏 Distanță: ~{km:.2f} km"
 
+    # --- Manager info (nume + telefon) ---
+    m_name = item.get("manager_name") or item.get("manager") or ""
+    m_phone_raw = item.get("manager_phone") or ""
+    m_phone_disp = phone_digits(m_phone_raw)  # pentru afișare
+    m_phone_e164 = phone_e164_md(m_phone_raw) # pentru contact
+
+    manager_block = ""
+    call_cb = None
+    if m_name or m_phone_disp:
+        manager_block = "\n\n👤 Manager: " + (m_name or "—")
+        manager_block += "\n📞 Telefon: " + (m_phone_disp or "—")
+        if m_phone_e164:
+            call_cb = f"call:{brand_code}:{n}"
+
     text = (
         f"🏪 {name} {n}\n"
         f"📍 {address}\n"
         f"📌 Coordonate: {lat:.6f}, {lon:.6f}\n"
         f"{dist_line}\n\n"
-        f"👤 Manager: {manager_name}\n"
-        f"📞 Telefon manager: {manager_phone}\n\n"
         f"{opened}\n"
         f"🕒 Program (azi: {today_txt or '—'})\n\n"
         f"{format_hours(hours)}"
+        f"{manager_block}"
     )
-    await message.answer(text, reply_markup=links_kb_single(lat, lon, call_tel=tel_link))
+    await message.answer(text, reply_markup=links_kb_single(lat, lon, call_cb=call_cb))
     if lat and lon:
         await message.answer_location(latitude=lat, longitude=lon, reply_markup=main_kb())
 
@@ -409,6 +409,7 @@ async def start(message: Message):
         reply_markup=main_kb()
     )
 
+# Callback „home” (din inline) → doar readuce tastatura
 @router.callback_query(F.data == "home")
 async def cb_home(cb: CallbackQuery):
     await cb.answer()
@@ -608,6 +609,31 @@ async def maintenance_actions(cb: CallbackQuery):
         await _send_loc_with_links(cb.message, MENT_FRUCTE_NAME, MENT_FRUCTE_LAT, MENT_FRUCTE_LON)
     elif key == "rezomedia":
         await _send_loc_with_links(cb.message, MENT_REZOMEDIA_NAME, MENT_REZOMEDIA_LAT, MENT_REZOMEDIA_LON)
+
+# ───── Buton: „📞 Apelează manager” ──────────────────────
+@router.callback_query(F.data.startswith("call:"))
+async def cb_call_manager(cb: CallbackQuery):
+    # format: call:<brand_code>:<numar>
+    try:
+        _, code, s_n = cb.data.split(":")
+        n = int(s_n)
+    except Exception:
+        await cb.answer("Eroare format.", show_alert=True)
+        return
+
+    d = DATA_BY_BRAND.get(code, {}).get(str(n)) or {}
+    m_name = (d.get("manager_name") or d.get("manager") or "Manager")
+    m_phone_e164 = phone_e164_md(d.get("manager_phone"))
+    if not m_phone_e164:
+        await cb.answer("Nu există număr de telefon.", show_alert=True)
+        return
+
+    # Trimitem contact – Telegram va afișa butonul de apel în client
+    await cb.message.answer_contact(
+        phone_number=m_phone_e164,
+        first_name=m_name
+    )
+    await cb.answer()
 
 # Catch-all log
 @router.message()
