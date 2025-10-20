@@ -614,7 +614,8 @@ async def maintenance_actions(cb: CallbackQuery):
         await _send_loc_with_links(cb.message, MENT_FRUCTE_NAME, MENT_FRUCTE_LAT, MENT_FRUCTE_LON)
     elif key == "rezomedia":
         await _send_loc_with_links(cb.message, MENT_REZOMEDIA_NAME, MENT_REZOMEDIA_LAT, MENT_REZOMEDIA_LON)
-
+    elif key == "renovatie":
+        await _send_loc_with_links(cb.message, MENT_RENO_NAME, MENT_RENO_LAT, MENT_RENO_LON)
 # ───── Buton: „📞 Apelează manager” ──────────────────────
 @router.callback_query(F.data.startswith("call:"))
 async def cb_call_manager(cb: CallbackQuery):
