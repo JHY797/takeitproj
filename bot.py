@@ -45,6 +45,10 @@ MENT_FRUCTE_NAME = "Fructe Legume Depo"
 MENT_FRUCTE_LAT = 46.99205105508518
 MENT_FRUCTE_LON = 28.88559278022606
 
+MENT_RENO_NAME = "Renovatie IT"
+MENT_RENO_LAT = 47.0426519229461
+MENT_RENO_LON = 28.862523753686208
+
 MENT_REZOMEDIA_NAME = "Rezomedia"
 MENT_REZOMEDIA_LAT = 47.01492352451698
 MENT_REZOMEDIA_LON = 28.85564912784494
@@ -334,6 +338,7 @@ def maintenance_kb() -> InlineKeyboardMarkup:
         [InlineKeyboardButton(text=f"📦 {MENT_TAKEIT_NAME}", callback_data="maint:takeit")],
         [InlineKeyboardButton(text=f"🥕 {MENT_FRUCTE_NAME}", callback_data="maint:fructe")],
         [InlineKeyboardButton(text=f"🏢 {MENT_REZOMEDIA_NAME}", callback_data="maint:rezomedia")],
+        [InlineKeyboardButton(text=f"💻 {MENT_RENO_NAME}", callback_data="maint:renovatie")],
         [InlineKeyboardButton(text="⬅️ Înapoi la meniu", callback_data="home")],
     ])
 
